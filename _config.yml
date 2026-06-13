@@ -208,7 +208,9 @@ incremental: false
 
 
 # Markdown Processing
+markdown: kramdown
 kramdown:
+  mathjax: true
   input: GFM
   hard_wrap: false
   auto_ids: true
