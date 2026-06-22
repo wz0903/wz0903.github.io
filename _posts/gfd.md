@@ -1,0 +1,1387 @@
+# 1. Fluid Fundamentals
+
+## 1.1 Lagrangian and Eluerian opinions
+Lagrangian: focus on the time variation of each mass point, follow each mass point. $B=B(a,b,c,t)$, where $a,b,c$ is the number of each mass point.
+**Eulerian**: focus on the time variation of each space point, fixed a spatial position. $\varphi=\varphi(x,y,z,t)$, where $x,y,z$ is the position of spatial position.
+**Material derivative (lagrangian)**
+$$
+\frac{D\varphi}{Dt} = \frac{\partial \varphi}{\partial t}+\bm{v}\cdot \nabla \varphi,\quad \frac{D\bm{b}}{Dt} = \frac{\partial \bm{b}}{\partial t}+(\bm{v}\cdot \nabla) \bm{b}\\
+\begin{align*}
+\frac{D}{Dt}\int_V f dV =& \int_V \frac{\partial f}{\partial t}dV+\int_{S = \partial V}f\bm{v}\cdot d\bm{S}\\
+=& \int_V \left[\frac{\partial f}{\partial t}+\nabla\cdot(f\bm{v})\right]dV\\
+=& \int_V \left[\frac{\partial f}{\partial t}+f\nabla\cdot\bm{v}+ (\bm{v}\cdot\nabla)f\right]dV\\
+=& \int_V \left[ \frac{Df}{Dt}+f\nabla\cdot\bm{v}\right]dV
+\end{align*}\\
+$$
+## 1.2 Mass Continuity:
+In a lagrangian body, all mass must stay in the body, therefore
+$$
+\frac{D}{Dt}\int_V \rho dV = \int_V \left[ \frac{D\rho}{Dt}+\rho\nabla\cdot\bm{v}\right]dV = 0 \text{(for any volume)}\\
+\boxed{
+\frac{D\rho}{Dt}+\rho\nabla\cdot\bm{v} = \frac{\partial \rho}{\partial t}+\nabla\cdot(\rho\bm{v})=0 \tag{1.1}
+}
+$$
+Therefore
+$$
+\begin{align*}
+\frac{D}{Dt}\int_V \rho\varphi dV =& \int_V \left[\frac{D}{Dt} (\varphi\rho)+\rho\varphi\nabla\cdot\bm{v}\right]dV\\
+=& \int_V \left[\rho\frac{D\varphi}{Dt}+\varphi(\frac{\partial\rho}{\partial t} +\nabla\cdot\bm{\rho v})\right]dV\\
+=&\int_V \rho\frac{D\varphi}{Dt}dV
+\end{align*}
+$$
+For **incompressible** fiulds:
+$$
+\rho(x,y,z,t) = \rho_0+\delta\rho(x,y,z,t)\\
+\frac{D(\rho_0+\delta\rho)}{Dt}+(\rho_0+\delta\rho)\nabla\cdot\bm{v}= \frac{D\delta\rho}{Dt}+(\rho_0+\delta\rho)\nabla\cdot\bm{v} = 0
+$$
+First order term, there is **Incompressible fluids' mass Continuity**
+$$
+\nabla\cdot\bm{v} = 0
+$$
+
+## 1.3 Momentum equation
+$$
+\frac{D}{Dt}\int_V\rho\bm{v}dV = \int_V \bm{F}dV,\rightarrow \int_V \left(\rho\frac{D\bm{v}}{Dt}-\bm{F}\right)dV\\
+\rho\frac{D\bm{v}}{Dt} =\bm{F} \quad \text{or}\quad \frac{\partial \bm{v}}{\partial t}+\bm{v}\cdot\nabla \bm{v} =\frac{\bm{F}}{\rho}
+$$
+$\bm{F}$ includes body forces (gravity, apparent forces) and contact forces (pressure and viscous)
+**Navier-Stokes equation**
+$$
+\boxed{
+\frac{\partial\bm{v}}{\partial t}+\bm{v}\cdot\nabla\bm{v} = -\frac{1}{\rho}\nabla p+\nu \nabla^2\bm{v}+\bm{F}\tag{1.2}
+}
+$$
+**Hydrostatic balance**
+Vertical component of the momemtum equation (upward is positive)
+$$
+\frac{Dw}{Dt} = -\frac{1}{\rho}\frac{\partial p}{\partial z}-g
+$$
+If the fluid is **static**, then the there is hydrostatic balance:
+$$
+\frac{\partial p}{\partial z} = -\rho g
+$$
+Vertical acceleration is nearly always much smaller than g, in both ocean and atmosphere. Therefore hydrostatic balance establish usually, therefore $p$ is achieved. However, hydrostatic balance is **not sufficient** to provide an accurate enough pressure to determine the **horizontal pressure gradient**.
+## 1.4 Equation of state
+There are already 3 momemtum equations and continuity equation for 5 unknown variables $\bm{v},\rho,p$, the last equation is equation of state.
+For atmosphere, $\boxed{p=\rho RT}$;
+For ocean, $\rho = \rho_0[1-\beta_T (T-T_0)+\beta_S (S-S_0)+\beta_p (p-p_0)]$.
+Another variable $T$ rises, and a new equation is needed.
+
+## 1.5 Thermodynamics: Fundamentals
+for unit mass, $\alpha = \frac{1}{\rho} = V_0$, entropy $s$,
+$$
+dU=c_v dT = dQ+dW =Tds-pd\alpha\\
+\frac{DU}{Dt}-\frac{p}{\rho^2}\frac{D\rho}{Dt} = \frac{DQ}{Dt}\\
+\boxed{c_v\frac{DT}{Dt}+\frac{p}{\rho}\nabla\cdot\bm{v} = \frac{DQ}{Dt}}\tag{1.3}
+$$
+## 1.6 Entropy and Potential Temperature for ideal gas
+
+When a fluid parcel changes pressure adiabatically, it will expand or contract with its temperature changes alongside. This temperature change is not caused by heating, but we may construct a temperature-like quantify that changes only if diabatic effects are present. Specifically potential temperature, 𝜃, is defined to be the temperature that a fluid would have if moved adiabatically and at a constant composition to some reference pressure ($p_R$, e.g. 1000 hPa).
+
+$$
+c_vdT+pdV = c_vdT +RdT- Vdp = c_p dT-Vdp=  Tds\\
+ds = c_p\frac{dT}{T}-R\frac{dp}{p}\\
+s = c_p\ln T-R\ln p+Const
+$$
+Adiabatic process $ds = 0$, therefore
+$$
+\int_T^\theta c_p\frac{dT}{T}-R\int_p^{p_R}\frac{dp}{p}=0\rightarrow c_p\ln \frac{\theta}{T}-R\ln \frac{p_R}{p} = Const, \theta = T(\frac{p_R}{p})^{R/c_p}\\
+ds = c_pd\ln\theta,\quad c_p\frac{D\theta}{Dt} = \frac{\theta}{T}\frac{DQ}{Dt}
+$$
+## 1.7 Energy budget
+**Inviscid** momentum equation with a time-independent potential $\Phi$,
+$$
+\rho\frac{D\bm{v}}{Dt} = -\nabla p-\rho\nabla\Phi\\
+\frac{1}{2}\rho \frac{D\bm{v}^2}{Dt} =-\bm{v}\cdot\nabla p-\rho\bm{v}\cdot \nabla\Phi = -\nabla(p\bm{v})+p\nabla\cdot\bm{v}-\rho\bm{v}\cdot \nabla\Phi 
+$$
+For **adiabatic flow**
+$$
+\rho\frac{DU}{Dt} = \frac{p}{\rho}\frac{D\rho}{Dt} = -p\nabla\cdot\bm{v}\\
+\rho\frac{D\Phi}{Dt} = \rho\bm{v}\cdot \nabla \Phi\\
+\rho \frac{D}{Dt}(\frac{1}{2}\bm{v}^2+U+\Phi) = -\nabla\cdot(p\bm{v})\\
+\rho \frac{D}{Dt}(\frac{1}{2}\bm{v}^2+U+\Phi) + \nabla\cdot(p\bm{v}) + (\frac{1}{2}\bm{v}^2+U+\Phi)(\frac{\partial \rho}{\partial t} +\nabla\cdot \rho \bm{v})= 0\\
+\frac{\partial}{\partial t}\left[\rho (\frac{1}{2}\bm{v}^2+U+\Phi)\right] + \nabla\left[\rho\bm{v}(\frac{1}{2}\bm{v}^2+U+\Phi+\frac{p}{\rho})\right] = 0
+$$
+Therefore the energy equation of **unforced, inviscid, adiabatic, compressible** fiuld is
+$$
+\boxed{
+\frac{\partial E}{\partial t}+ \nabla\cdot [\bm{v}(E+p)] = 0,\quad E = E_k+U+E_p\tag{1.4}
+}
+$$
+Def enthalpy $h \triangleq U+p/\rho$, flux energy $F_E \triangleq \bm{v}(E+p) = \rho \bm{v} (\frac{1}{2}\bm{v}^2+\Phi+h)$, Bernoulli function $B = \frac{1}{\rho} (E+p)$, therefore
+$$
+\frac{\partial E}{\partial t}+\nabla\cdot (\rho\bm{v}B) =0
+$$
+
+>NOTE: Bernoulli function is not conserved even for adiabatic flow; Steady flow $\frac{\partial}{\partial t} = 0$, therfore $\bm{v}\cdot\nabla B=0$, which is Bernoulli's theorem.
+
+For **constant density fluid**$ \frac{D\rho}{Dt} =\frac{\partial \rho}{\partial t} = 0$, therefore $\nabla\cdot\bm{v} = 0$, the energy equation becomes
+$$
+\frac{\partial }{\partial t}(\frac{1}{2}\bm{v}^2) + \nabla \cdot \left[\bm{v}(\frac{1}{2}\bm{v}^2+\frac{p}{\rho_0}+\Phi)\right] = 0
+$$
+
+**Viscous effects**: For a constant $\rho$ fluid, there is
+$$
+\frac{D\bm{v}}{Dt} = -\nabla (\frac{p}{\rho}+\Phi)+\nu \nabla^2\bm{v}\\
+\frac{D}{Dt}\left[\rho(\frac{1}{2}\bm{v}^2+\frac{p}{\rho}+\Phi)\right] = \mu\bm{v}\nabla^2\bm{v}\\
+\begin{align*}
+\frac{D}{Dt}\int_V EdV =& \mu \int_V\bm{v}\cdot \nabla^2\bm{v}dV=\mu \int_V \bm{v}\cdot\left[\nabla(\nabla\cdot\bm{v})-\nabla\times(\nabla\times\bm{v})\right]dV\\
+=&-\mu\int_V\bm{v}\cdot[\nabla\times(\nabla\times\bm{v})]dV = -\mu\int_V\bm{v}\cdot (\nabla\times\bm{\omega}) dV=-\mu\int_V\bm{\omega}^2dV
+\end{align*}
+$$
+where $\bm{\omega} = \nabla\times\bm{v}$ is vorticity.
+
+# 2. Effects of Rotation and Stratification
+## 2.1 Equations of Motion in a Rotation Frame
+### 2.1.1 Rate of change of a vector
+$$
+(\frac{d\bm{C}}{dt})_I =(\frac{d\bm{C}}{dt})_R+\bm{\Omega} \times \bm{C}\\
+(\frac{d\bm{r}}{dt})_I =\bm{v_I}=(\frac{d\bm{r}}{dt})_R+\bm{\Omega} \times \bm{r} = \bm{v_R}+\bm{\Omega}\times\bm{r}\\
+(\frac{d\bm{v_R}}{dt})_I =(\frac{d\bm{v_R}}{dt})_R+\bm{\Omega} \times \bm{v_R}\\
+(\frac{(d\bm{v_I}-\bm{\Omega}\times \bm{r})}{dt})_I =  (\frac{d\bm{v_R}}{dt})_R+\bm{\Omega} \times \bm{v_R}\\
+(\frac{d\bm{v_I}}{dt})_I = (\frac{d\bm{v_R}}{dt})_R+\bm{\Omega} \times \bm{v_R}+\frac{d\bm{\Omega}}{dt}\times \bm{r}+\bm{\Omega}\times(\bm{v_R}+\bm{\Omega}\times \bm{r})
+$$
+Assume $\frac{d\bm{\Omega}}{dt} = 0$, therefore
+$$
+(\frac{d\bm{v_I}}{dt})_R = (\frac{d\bm{v_R}}{dt})_I-2\bm{\Omega} \times \bm{v_R}-\bm{\Omega}\times(\bm{\Omega}\times \bm{r})
+$$
+The left is rate of change of the relative velocity in the rotating frame. The first term on the right is force, the second term is Coriolis force, the third term is Centrifugal force.
+
+### 2.1.2 Equations of Motion in a Rotating Frame: 
+**Momentum Equation**
+$$
+(\frac{D\bm{v}}{D t})_I = -\frac{1}{\rho}\nabla p+\nu \nabla^2\bm{v}_I+\bm{F}
+$$
+In the rotating frame of reference, the momentum equation for **inviscid** flow may be written
+$$
+\frac{D\bm{v}}{D t} +2\bm{\Omega} \times \bm{v} = -\frac{1}{\rho}\nabla p-\nabla\Phi\tag{2.1}
+$$
+**Mass continuity and Thermodynamics**
+$$
+(\frac{D\varphi}{Dt})_I = (\frac{D\varphi}{Dt})_R\\
+\nabla\cdot \bm{v}_I = \nabla\cdot (\bm{v_R}+\bm{\Omega}\times\bm{r})=\nabla \cdot \bm{v}_R\\
+\frac{D\rho}{Dt} + \rho\nabla\cdot \bm{v}_R = 0
+$$
+The evolution equation for a scalar (therefore thermodynamics) whose value is the same in rotating and inertial frames is unaltered by rotation.
+
+
+## 2.2 Equations of Motion in a Spherical Coordinates
+
+## 2.3 Cartesian Approximations: The f-plane
+The **rotation of the Earth is central** for many dynamical phenomena. 
+The sphericity of the Earth is not always so, especially for phenomena on scales smaller than global. It is more convenient to use a locally Cartesian representation of the equations considering rotation. 
+So we define a plane tangent to the surface of the Earth, and then use a Cartesian coordinate system $(x, y, z)$ to describe motion on that plane. For small excursions on the plane, $(x,y,z)≈(a\lambda \cos\theta_0⁡,a(\theta-\theta_0),z)$. Consistently, the velocity $\bm{v}=(u,v,w)$, so that the components of the velocity in the tangent plane, are approximately in the east-west, north-south, and vertical directions, respectively.
+**momentum equations in f-plane**
+$$
+\left\{ 
+\begin{array}{ll}
+\frac{\partial u}{\partial t} +\bm{v}\cdot\nabla u+2(\Omega^yw-\Omega^zv) = -\frac{1}{\rho}\frac{\partial p}{\partial x}\\
+\frac{\partial v}{\partial t} +\bm{v}\cdot\nabla v+2(\Omega^zu-\Omega^xw) = -\frac{1}{\rho}\frac{\partial p}{\partial y}\\
+\frac{\partial w}{\partial t} +\bm{v}\cdot\nabla w+2(\Omega^xv-\Omega^yu) = -\frac{1}{\rho}\frac{\partial p}{\partial z}-g
+\end{array} \tag{2.2}
+\right.
+$$
+where $(\Omega^x,\Omega^y,\Omega^z)=(0, \Omega\cos\theta_0, \Omega\sin\theta_0)$
+
+**Shallow atmosphere** approximation, then equations become
+$$
+\frac{Du}{Dt}-f_0v=-\frac{1}{\rho}\frac{\partial p}{\partial x},\frac{Dv}{Dt}+f_0u=-\frac{1}{\rho}\frac{\partial p}{\partial y},\frac{Dw}{Dt}=-\frac{1}{\rho}\frac{\partial p}{\partial z}-g,f_0=2\Omega\sin\theta_0
+$$
+With $\bm{u} \triangleq (u,v,0), \bm{f_0} \triangleq 2\Omega\sin\theta_0\hat{\bm{k}}$, there are
+$$
+\frac{D\bm{u}}{Dt}+\bm{f_0}\times\bm{u} = -\frac{1}{\rho}\nabla_z p,\frac{Dw}{Dt}=-\frac{1}{\rho}\frac{\partial p}{\partial z}-g\tag{2.3}
+$$ 
+**$\beta$-plane**
+Magnitude of vertical component or roration $f_0$ varies with latitude
+$$
+f = 2\Omega\sin\theta = 2\Omega\sin\theta_0+2\Omega(\theta-\theta_0)\cos\theta_0=f_0+\beta y, f_0 = 2\Omega\sin\theta_0, \beta = 2\Omega\cos\theta_0/R_e
+$$
+
+**momentum equation**
+$$
+\frac{D\bm{u}}{Dt}+\bm{f}\times\bm{u} = -\frac{1}{\rho}\nabla_z p,\frac{Dw}{Dt}=-\frac{1}{\rho}\frac{\partial p}{\partial z}-g, \bm{f} = (f_0+\beta y)\hat{\bm{k}}\tag{2.4}
+$$
+Equvalent to a **differentially rotating system without complicating geometry.**
+
+
+
+## 2.4 Density variations in the Atmosphere and Ocean
+### 2.4.1 Ocean
+**Boussinesq Approximation**
+Take advantage of the near incompressibility of water (establish in ocean) , but allow **density to vary as needed**, which is
+$$
+\rho=\rho_0+\delta\rho(x,y,z,t), \rho_0=Constant, |\delta\rho|\ll \rho_0\\
+p=p_0(z)+\delta p(x,y,z,t),|\delta p|\ll p_0, \frac{dp_0}{dz}\triangleq-\rho g
+$$
+Therefore the momentum equation (2.1) becomes
+$$
+\begin{align*}
+(\rho_0+\delta\rho)(\frac{D\bm{v}}{Dt}+2\bm{\Omega}\times\bm{v}) =& -\nabla (p_0+\delta p)-g(\rho_0+\delta\rho)\hat{\bm{k}}\\
+=& -\nabla\delta p-\frac{dp}{dz}-g\rho_0\hat{\bm{k}}-g\delta\rho\hat{\bm{k}}\\
+=&-\nabla \delta p-g\delta\rho\hat{\bm{k}}
+\end{align*}
+$$
+With $|\delta\rho|\ll\rho$, kinetic pressure $\phi\triangleq \frac{\delta\rho}{\rho_0}$, bouyancy $b\triangleq -\frac{g\delta\rho}{\rho_0}$, there is Boussinesq approximation (ignore all variation of density except when associated with gravitational term $b$) **momentum equation**:
+$$
+\frac{D\bm{v}}{Dt}+2\bm{\Omega}\times\bm{v} = -\nabla \phi+b\hat{\bm{k}}\tag{2.5}
+$$
+**mass continuity** from (1.2)
+$$
+\frac{D\delta\rho}{Dt}+(\rho_0+\delta\rho)\nabla\cdot\bm{v} = 0\rightsquigarrow \nabla\cdot\bm{v} = 0\tag{2.6}
+$$
+Same as constant density fluid but actually density is governed by thermodynamics and states. Besides, No time dervative of density indicates impossibility of sound waves.
+**Thermodynamics and states** from (1.3)
+$$
+\frac{DU}{Dt}+ \frac{p}{\rho}\nabla \cdot \bm{v} = c_v\frac{DT}{Dt} +0 = \frac{DQ}{Dt} = \dot{Q}\\
+\frac{DT}{Dt} = \frac{\dot{Q}}{c_v}\quad  \text{for atmosphere}\\
+b = \frac{g(\rho_0-\rho)}{\rho_0} \approx g\beta_T (T-T_0)\rightarrow \frac{Db}{Dt} = \frac{g\beta_T\dot{Q}}{c_v}\quad \text{for ocean}
+$$
+**Energetics** from (2.4) without ang dissipation
+$$
+\frac{D\bm{v}}{Dt}+2\bm{\Omega}\times\bm{v} = -\nabla \phi+b\hat{\bm{k}},\nabla \cdot\bm{v}=0,\frac{Db}{Dt} =0\\
+\frac{1}{2}\frac{D\bm{v}^2}{Dt} = -\bm{v}\cdot\nabla\phi-\phi\nabla\cdot \bm{v}+bw+\frac{Db}{Dt}z = -\nabla\cdot (\phi\bm{v})+\frac{D(bz)}{Dt}\\
+\frac{\partial}{\partial t}(\frac{1}{2}\bm{v}^2-bz) +\nabla\cdot\left[\bm{v}(\frac{1}{2}\bm{v}^2-bz+\phi)\right]=0\tag{2.7}
+$$
+Due to imcompressibility approx, there is no internal energy, and $\rho_0\int bzdz = \int g(\rho_0-\rho)dz$ represents the potential energy.
+### 2.4.2 Atmosphere
+**Anelastic Equations**
+Weak Boussinesq approx, with assuming density has a background state $\rho(z)$ instead of a constant $\rho$.
+$$
+\rho = \tilde{\rho}(z)+\rho'(x,y,z,t),|\rho'|\ll \tilde{\rho}(z)\\
+p=p_0(z)+\delta p(x,y,z,t),|\delta p|\ll p_0, \frac{dp_0}{dz} = \tilde{\rho}(z)
+$$
+Motion equation are very similar to the Boussinesq set except that the mass continuity becomes
+$$
+\frac{D(\tilde{\rho}+\rho')}{Dt}+(\tilde{\rho}+\rho')\nabla\cdot\bm{v} =0 \\
+w\frac{\partial \tilde{\rho}}{\partial z} + \rho(z)\nabla\cdot\bm{v} = 0\\
+\frac{\partial u}{\partial x} + \frac{\partial v}{\partial y}+ \frac{1}{\tilde{\rho}}\frac{\partial (w\tilde{\rho})}{\partial z} = 0\tag{2.8}
+$$
+and bouyancy becomes $b = \frac{g\delta\theta}{\theta_0}$, related to potential temperature $\theta$.
+
+
+
+## 2.5 Pressure and Other Vertical Coordinates
+
+## 2.6 Scaling for Hydrostatic Balance
+In **Boussinesq approx** we eliminate the unimportant effects of nearly constant density. Now consider gravity and rotation effects to get **hydrostatic** and **geostrophic** balance.
+
+Vertical momentum equation in f-plane from (2.2)
+$$
+\frac{\partial w}{\partial t} +\bm{v}\cdot\nabla w+2(\Omega^xv-\Omega^yu) = -\frac{1}{\rho}\frac{\partial p}{\partial z}-g\\
+\frac{W}{T}+\frac{UW}{L}+\frac{W^2}{H}+\Omega U\sim |\frac{1}{\rho}\frac{\partial p}{\partial z}|+g
+$$
+Take $W\sim 1$ m/s, $L\sim 10^5$ m, $H\sim 10^3$ m, $U\sim 10$ m/s, $\Omega\sim 10^{-4}$ /s, $T=\frac{L}{U}\sim 10^4$ s. Therefore pressure term is the only one who can balance the gravitational term, therefore **hydrostatic balance approx**
+$$
+\frac{\partial p}{\partial z}=-\rho g\tag{2.9}
+$$
+However, equation above is not a useful (momemtum) equation.
+Suppose that **Density** is a constant $\rho_0$, then
+$$
+p(x,y,z,t) = p_0(z)+p'(x,y,z,t),\frac{\partial p_0}{\partial z}=-\rho_0 g
+$$
+Therefore on the f-plane, the inviscid vertical momentum equation without approx is
+$$
+\frac{Dw}{Dt} = -\frac{1}{\rho}\frac{\partial p'}{\partial z}\tag{2.10}
+$$
+For a constant density fluid, $g$ has no dynamical effect and buoyancy, preesure term in horizontal momentum can be replaced by $p'$.
+
+In Boussinesq fluid, from (2.5)
+$$
+\frac{D\bm{u}}{Dt}+\bm{f}\times\bm{u} = -\nabla_z \phi,\frac{Dw}{Dt}=-\frac{1}{\rho}\frac{\partial p}{\partial z}-g
+$$
+with $\bm{f}=0$, scaling of $\phi\sim U^2$, with mass conservation, scaling of vertical velocity $w\sim UH/L$, therefore $\frac{Dw}{Dt} \sim \frac{U^2}{L^2}H$
+$$
+\frac{\frac{Dw}{Dt}}{\frac{\partial \phi}{\partial z}} \sim \frac{U^2H/L^2}{U^2/H}\sim \frac{H^2}{L^2}\ll 1 \quad\text{(hydrostatic balance)}
+$$
+
+
+
+
+## 2.7 Geostrophic and Thermal Wind Balance
+### 2.7.1 Rossby number
+From (2.4)
+$$
+\frac{D\bm{u}}{Dt}+\bm{f}\times\bm{u} = -\frac{1}{\rho}\nabla_z p\\
+\frac{U^2}{L}+fU
+$$
+**Rossby number**: ratio of advective and Coriolis terms $R_o = \frac{U}{fL} = \frac{T_i}{T}$, where $T_i=1/f$ is inertial time scale.
+For phenomena much longer than inertial time scale, rotation is important, while for short-lived phemomenon, rotation can be ignored.
+### 2.7.2 Geostrophic balance
+If Rossby number is sufficiently small, then rotation term dominates the advection term, there is **Geostrophic balance**
+$$
+\bm{f}\times\bm{u} = -\frac{1}{\rho}\nabla_z p\tag{2.11}
+$$
+def geostrophic velocity $u_g,v_g$
+$$
+fu_g = -\frac{1}{\rho}\frac{\partial p}{\partial y},fv_g = \frac{1}{\rho}\frac{\partial p}{\partial x}
+$$
+
+For low rossby number $u\approx u_g,v\approx v_g$.
+
+If $f$ is constant (f-plane instrad of $\beta$-plane) and density does not vary in the horizontal, then
+$$
+\nabla_z \cdot \bm{u_g} = \frac{\partial u_g}{\partial x}+\frac{\partial v_g}{\partial y} = 0\\
+\psi\triangleq\frac{p}{f_0\rho_0}, u_g = -\frac{\partial \psi}{\partial y},v_g = \frac{\partial \psi}{\partial x}\\
+\zeta \triangleq \hat{\bm{k}}\cdot \nabla\times\bm{v} = -\frac{\partial u}{\partial y}+\frac{\partial v}{\partial x} = \nabla^2_z\psi
+$$
+
+If $f$ is not constant ($\beta$-plane), for **constant density geostrophic flow**, there is
+$$
+\frac{\partial (fu_g)}{\partial x}+ \frac{\partial (fv_g)}{\partial y}=f(\frac{\partial u_g}{\partial x}+ \frac{\partial v_g}{\partial y})+v_g\frac{\partial f}{\partial y} = 0\\
+\beta v_g = -f\nabla_z\cdot \bm{u_g} = f\frac{\partial w}{\partial z}
+$$
+
+### 2.7.3 Taylor-Proudman Effect
+If $\beta = 0$, therefore the vertical velocity $w$ is not a function of height. Moreover, none of the components vary with height if $\rho$ is **constant**.
+$$
+u = -\frac{1}{f_0}\frac{\partial \phi}{\partial y},v = \frac{1}{f_0}\frac{\partial \phi}{\partial x},\frac{\partial \phi}{\partial z} = \frac{\partial }{\partial z}(\frac{p}{\rho}) = -g\quad \text{hydrostatic and geostrophic balance}\\
+\frac{\partial v}{\partial z} = \frac{1}{f_0}\frac{\partial^2 \phi}{\partial x\partial z} = 0 = \frac{\partial u}{\partial z}
+$$
+Taylor-Proudman effect:
+If there is a solid horizontal boundary anywhere in the fluid, for example at the surface, then $w=0$ at the surface and thus $w=0$ everywhere. Actually this is a 2d motion.
+
+### 2.7.4 Thermal wind balance
+Condition: **Hydrostatic and geostrophic balance**. Most easily done in Boussinesq equations.
+From (2.10),
+$$
+fu_g = -\frac{1}{\rho}\frac{\partial p}{\partial y},fv_g = \frac{1}{\rho}\frac{\partial p}{\partial x}\\
+\frac{\partial \phi}{\partial z} = b \quad \text{Boussinesq ($\rho=\rho_0+\delta\rho$) and Hydrostatic ($\frac{\partial p}{\partial z}=-\rho g$) from (2.5)}\\
+\boxed{
+f\frac{\partial v_g}{\partial z} = \frac{\partial b}{\partial x}, f\frac{\partial u_g}{\partial z} = -\frac{\partial b}{\partial y}\quad \text{Thermal wind balance}
+}
+$$
+
+If buoyancy $b = 0$, (constant density), no shear, recovering to Taylor-Proudman effect.
+But if $\frac{\partial{b}}{\partial y} <0$ (atmosphere $b = g\frac{\delta\theta}{\theta_0}$), then ${\partial u_g}{\partial z}>0$, agreeing with the ovservations.
+> NOTE: if the flow is close to geostrophic balance, then the vertical velocity is smaller than it would be otherwise, and indeed hydrostatic balance is even more likely to obtain. That is, geostrophic balance help to reach hydrostatic balance.
+
+
+
+# 3. Shallow Water Systems
+The shallow water equations describe a shallow layer of fluid, and in particular one that’s in **hydrostatic balance** (small aspect ratio) and has **constant density**. The equations are 
+
+## 3.1 Shallow Water Equations of Motion
+### 3.1.1 Momentum equations
+from (2.9) with constant density $\rho = \rho_0$
+$$
+p(x,y,z,t) = -\rho gz+p_0
+$$
+At the top of the fluid $p(z = \eta(x,y,t))=0$, therefore $p(x,y,z,t) = \rho_0g(\eta-z)$. Therefore horizontal gradient of pressure is independent of height. That is
+$$
+\nabla_z p = \rho_0 g\nabla_z\eta, \nabla_z = \hat{\bm{i}}\frac{\partial}{\partial x}+ \hat{\bm{j}}\frac{\partial}{\partial y}
+$$
+No relation with $z$, therefore all $\nabla$ represent $\nabla_z$ in this chapter from now on, and $\nabla_3$ indicating 3d $\nabla$.
+from (2.4)
+$$
+\boxed{
+\frac{D\bm{u}}{Dt}+\bm{f}\times\bm{u} = -\frac{1}{\rho}\nabla p = -g\nabla \eta = -g\nabla h\tag{3.1}
+}
+$$
+### 3.1.2 Mass continuity
+If the flow is initially independet of $z$, it must stay so (different from Taylor-Proudman effect). The velocities $u$ and $v$ are functions of $x$, $y$, and t only.
+Since constant $\rho$, that is incompressible too, $\nabla_3\cdot \bm{v}=0$, therefore
+$$
+\frac{\partial w}{\partial z} = -\nabla\cdot \bm{u}\rightarrow w(\eta)-w(\eta_b) =\frac{D\eta}{Dt} - \frac{D\eta_b}{Dt}= -h\nabla \cdot \bm{u}(x,y,t)\\
+\boxed{
+\frac{D(\eta-\eta_b)}{Dt} + h\nabla \cdot \bm{u} =0\quad \text{or}\quad \frac{Dh}{Dt} + h\nabla \cdot \bm{u} =0\tag{3.2}
+}
+$$
+
+Usually $\frac{\partial \eta_b}{\partial t} = 0$, therefore
+### 3.1.3 Reduced gravity equations: 1.5-layer model
+Now consider a single shallow moving layer of fluid on top of a deep, quiescent (motionless) fluid layer, the so called 1.5-layer model (Usually for oceanic case).
+In upper layer, there is **Momentum equation**
+$$
+p_1(z)=\rho_1 g(\eta_0-z),\frac{D\bm{u}}{Dt}+\bm{f}\times\bm{u} = -g\nabla \eta_0
+$$
+In lower layer, there is
+$$
+p_2(z)=\rho_1 g(\eta_0-\eta_1)+\rho_2 g(\eta_1-z)
+$$
+
+If the lower layer is motionless, the **horizontal pressure gradient in layer 2 is zero**. Therefore
+$$
+\nabla p_2 = \rho_1 g\nabla\eta_0+(\rho_2-\rho_1) g\nabla\eta_1 = 0\quad  \text{for any position in lower layer}\\
+\rho_1g\eta_0 = -\rho_1 g'\eta_1+C,g' = \frac{\rho_2-\rho_1}{\rho_1}\quad \text{reduced gravity}
+$$
+
+In ocean, $\frac{\rho_2-\rho_1}{\rho_1}\ll 1$, therefore $g'\ll g$.
+The equations in upper layer are
+$$
+\frac{D\bm{u}}{Dt}+\bm{f}\times\bm{u} = g'\nabla \eta_1, \frac{Dh}{Dt} + h\nabla \cdot \bm{u} =0
+$$
+> NOTE: The surface displacements are much smaller than the displacement at the interface. The elevation slopres of the surface and interface must be opposite.
+
+
+## 3.2 Conservation Properties
+There are two common types of conservation property in fluids: (i) material invariants; and (ii) integral invariants. 
+### 3.2.1 Energy conservation: an Integral invariants
+
+Potential energy
+$$
+\int_0^h\rho gzdz = \frac{1}{2}\rho gh^2
+$$
+from (3.2),
+$$
+g\frac{1}{2}\frac{Dh^2}{Dt} + gh^2\nabla \cdot \bm{u} =0\\
+\frac{\partial}{\partial t}(\frac{gh^2}{2}) +\bm{u}\cdot\nabla\frac{gh^2}{2}+  gh^2\nabla \cdot \bm{u} =0\\
+\frac{\partial}{\partial t}(\frac{gh^2}{2}) +\nabla\cdot(\bm{u}\frac{gh^2}{2})+  \frac{gh^2}{2}\nabla \cdot \bm{u} =0\tag{3.3}
+$$
+Multiply $h\bm{u}$ on (3.1) and $\frac{\bm{u}^2}{2}$ on (3.2), there is
+$$
+h\bm{u}\frac{D\bm{u}}{Dt} + 0= -gh\bm{u}\cdot\nabla h \quad \text{and}\quad \frac{\bm{u}^2}{2}\frac{Dh}{Dt} + \frac{h\bm{u}^2}{2}\nabla \cdot \bm{u} =0\\
+h\frac{D}{Dt}(\frac{\bm{u}^2}{2}) + g\bm{u}\cdot\nabla \frac{h^2}{2} =0 \quad \text{and}\quad \frac{\bm{u}^2}{2}\frac{Dh}{Dt} + \frac{h\bm{u}^2}{2}\nabla \cdot \bm{u} =0\\
+\frac{\partial }{\partial t}(\frac{h\bm{u}^2}{2})+\nabla\cdot (\bm{u}\frac{h\bm{u}^2}{2})+ g\bm{u}\cdot\nabla \frac{h^2}{2} =0\tag{3.4}
+$$
+
+Add (3.3) and (3.4), there is
+$$
+\boxed{
+\frac{\partial }{\partial t}(\frac{h\bm{u}^2}{2}+\frac{gh^2}{2})+\nabla\cdot \left[\bm{u}\cdot(\frac{h\bm{u}^2}{2}+\frac{gh^2}{2}+\frac{gh^2}{2})\right]=0 \quad \text{Energy equation}\tag{3.5}
+}
+$$
+Integrate over full region $A=\partial V$ (rigid walls),
+$$
+\frac{d\hat{E}}{dt} = \frac{1}{2}\frac{d}{dt}\int_A (h\bm{u}^2+gh^2)dA = \int_A \nabla\cdot \left[\bm{u}\cdot(\frac{h\bm{u}^2}{2}+\frac{gh^2}{2}+\frac{gh^2}{2})\right]dA = \int_l \bm{u}\cdot(\frac{h\bm{u}^2}{2}+\frac{gh^2}{2}+\frac{gh^2}{2})d\bm{l}=0
+$$
+### 3.2.2 Potential Vorticity: a Material Invariant
+Vorticity: $\omega\triangleq\nabla\times\bm{v}, \omega^* \triangleq \nabla\times\bm{u}$
+Since $z$ independenti in shallow water systems, therefore $\frac{\partial u}{\partial z} = \frac{\partial v}{\partial z} = 0$, therefore $\omega^* = \hat{\bm{k}}(\frac{\partial v}{\partial x}-\frac{\partial u}{\partial y}) = \hat{\bm{k}}\zeta$
+From (3.1) and apply that $\bm{u}\cdot\nabla\bm{u}=\frac{1}{2}\nabla(\bm{u}^2)-\bm{u}\times(\nabla\times\bm{u})$
+$$
+\frac{\partial \bm{u}}{\partial t}+\bm{\omega}^*\times\bm{u} +\bm{f}\times\bm{u}=-\nabla(g\eta+\frac{1}{2}\bm{u}^2)\\
+\frac{\partial (\nabla\times\bm{u})}{\partial t}+\nabla\times(\bm{\omega}^*\times\bm{u}) +\nabla\times(\bm{f}\times\bm{u})=-\nabla\times\nabla(g\eta+\frac{1}{2}\bm{u}^2)=0\\
+\nabla\times(\bm{f}\times\bm{u})=\varepsilon_{ijk}\hat{e_k}\partial_i\varepsilon_{jmn}f_mu_n = \hat{e_k}(\delta_{km}\delta_{in}-\delta_{kn}\delta_{im})\partial_i f_mu_n = \hat{e_k}\partial_i f_ku_i-\hat{e_k}\partial_i f_iu_k = 0\\
+\nabla\times(\bm{\omega}^*\times\bm{u}) = (\bm{u}\cdot\nabla)\bm{\omega}^*-(\bm{\omega}^*\cdot\nabla)\bm{u}+\bm{\omega^*}\nabla\cdot\bm{u}-\bm{u}\nabla\cdot\bm{\omega^*} = (\bm{u}\cdot\nabla)\bm{\omega}^*+\bm{\omega^*}\nabla\cdot\bm{u}\\
+\nabla\times(\bm{f}\times\bm{u})= (\bm{u}\cdot\nabla)\bm{f}-(\bm{f}\cdot\nabla)\bm{u}+\bm{f}\nabla\cdot\bm{u}-\bm{u}\nabla\cdot\bm{f} =  
+$$
+
+Multiple the vorticity equation by $\hat{k}$, there is
+$$
+\frac{\partial \zeta}{\partial t}+(\bm{u}\cdot \nabla)(\zeta+f) = -(\zeta+f)\nabla\cdot \bm{u}\\
+\frac{D}{Dt}(\zeta+f)=-(\zeta+f)\nabla\cdot\bm{u}=\frac{\zeta+f}{h}\frac{Dh}{Dt}\quad \text{apply (3.2)}\\
+\boxed{
+\frac{DQ}{Dt} = 0,\quad Q \triangleq \frac{\zeta+f}{h}\quad\text{Potential Vorticity Conservation}
+}\tag{3.6}
+$$
+
+## 3.3 Shallow Water Waves
+
+
+
+## 3.4 Geostrophic Adjustment
+
+
+
+
+# 4. Geostrophic Theory
+In this chapter we exploit the geostrophic and hydrostatic balances to derive various simplified sets of equations. In particular, we want to eliminate the scales of motions that we don’t care about, e.g. sound waves and gravity waves, and keep the scales we care about, i.e. the very large scales (planetary-geostrophic, PG) and synoptic scales (quasi-geostrophic, QG).
+
+$R_o = U/fL\ll 1$
+## 4.1 Scaling the Shallow Water Equations
+Begin with (3.1)
+$$
+\frac{\partial \bm{u}}{\partial t}+ \bm{u}\cdot\nabla\bm{u}+\bm{f}\times\bm{u}=-g\nabla\eta\\
+\frac{U}{T}\qquad \frac{U^2}{L}\qquad fU\quad \sim \quad g\frac{\mathcal{H}}{L}
+$$
+
+For advective scale $T=L/U$, ratio of advection term to the rotational term becomes $R_o=U/fL$, which is Rossby number.
+
+**Small Rossby number** $\bm{f}\times\bm{u}\sim-g\nabla\eta$, therefore $\mathcal{H}=\frac{fUL}{g} = R_o\frac{f^2L^2}{g} = R_oH\frac{L^2}{L_d^2}$. $H$ is the mean depth of the fluid while $L_d = \frac{\sqrt{gH}}{f}$ is the deformation radius. Therfore $\frac{\mathcal{H}}{H} = R_o\frac{L^2}{L_d^2}$,
+
+If use scale $(x,y) = L(\hat{x},\hat{y}), (u,v) = U(\hat{u},\hat{v})$, therefore **Momentum equation** (3.1) becomes
+$$
+R_o[\frac{\partial \hat{u}}{\partial \hat{t}}+\hat{\bm{u}}\cdot\nabla\hat{\bm{u}}]+\hat{\bm{f}}\times\hat{\bm{u}}=-\nabla\hat{\eta}\tag{4.1}
+$$
+**Mass Continuity** (3.2)
+$$
+\frac{Dh}{Dt} + h\nabla \cdot \bm{u} =0 \rightarrow \frac{D(H+h_D)}{Dt}+(H+h_D)\nabla\cdot\bm{u}=0\\
+R_o\frac{L^2}{L_d^2}\frac{D\hat{h_D}}{D\hat{t}}+(1+R_o\frac{L^2}{L_d^2}\hat{h_D})\nabla\cdot\bm{u}=0\tag{4.2}
+$$
+
+Some terms in the nondimensional momentum and height equations can be eliminated with little loss of accuracy, depending on the size of the second nondimensional parameter, $L^2/L_d^2$.
+
+$L_d = \frac{\sqrt{gH}}{f} \sim 4000$km.
+
+
+
+## 4.2 Geostrophic Shallow Water Equations
+### 4.2.1 Planetary-Geostrophic (PG)
+$R_o\ll1$, and $L/L_d\gg1$, such that $R_o(\frac{L}{L_d})^2=O(1)$. Therefore (4.1) and (4.2) becomes
+$$
+\bm{f}\times\bm{u}=-\nabla\eta\quad \text{and}\quad \frac{Dh}{Dt}+h\nabla\cdot\bm{u}=0\quad\text{Momentum/Mass equation in PG}
+$$
+
+Potential vorticity
+$$
+\boxed{
+\frac{D}{Dt}(\frac{\zeta+f}{h}) = \frac{D}{Dt}\left[\frac{f}{h}(1+\frac{\zeta}{f})\right] \approx \frac{D}{Dt}(\frac{f}{h}) = 0\quad\text{PGPV}\tag{4.3}
+}
+$$
+
+### 4.2.2 Quasi-Geostrophic (QG)
+$R_o\ll1$, and $L/L_d =O(1)$, such that $R_o(\frac{L}{L_d})^2\ll 1$. Therefore (4.1) becomes
+$$
+\bm{f}\times\bm{u}=-\nabla\eta\quad \text{Momentum equation in QG}
+$$
+
+However, from $\bm{f}\times\bm{u}=-\nabla\eta$ can derive $\nabla\cdot\bm{u}=0$ easily (which is (4.2)), therefore there are not new equations. Another independent equation is needed without (3.2).
+
+Begin with 3 assumptions:
+1. $R_o\ll 1$;
+2. $\frac{L}{L_d} =O(1)$, s.t. $R_o(\frac{L}{L_d})^2\ll 1$;
+3. variations of the coriolis parameter are small, so that $f=f_0+\beta y$, and $\beta y\ll f_0$
+
+Begin from shallow water vorticity equation before applying (3.2)
+$$
+\frac{\partial \zeta}{\partial t}+(\bm{u}\cdot \nabla)(\zeta+f) = -(\zeta+f)\nabla\cdot \bm{u}
+$$
+
+Since geostrophic balance, divide $\bm{u} = \bm{u_g}+\bm{u_a}$, assuming $\frac{|\bm{u_g}|}{|\bm{u_a}|}=O(R_o)$. Therefore $\bm{f_0}\times{\bm{u_g}} \approx -g\nabla \eta$, i.e. $\nabla\cdot\bm{u_g} = 0$
+
+$$
+\frac{\partial (\zeta_g+\zeta_a+f_0+\beta y)}{\partial t}+ [(\bm{u_g}+\bm{u_a})\cdot\nabla]\left(\zeta_g+\zeta_a+f_0+\beta y\right) = -(\zeta_g+\zeta_a+f_0+\beta y)\nabla\cdot(\bm{u_g}+\bm{u_a})\\
+\frac{\partial (\zeta_g+\zeta_a)}{\partial t}+ [(\bm{u_g}+\bm{u_a})\cdot\nabla]\left(\zeta_g+\zeta_a+\beta y\right) = -(\zeta_g+\zeta_a+f_0+\beta y)\nabla\cdot\bm{u_a}\\
+\frac{(R_o+R_o^2)f_0}{L/U}\quad \frac{U(1+R_o)(R_o+R_o^2+R_o)f_0}{L}\quad \sim \frac{(R_o+R_o^2+1+R_o)f_0R_oU}{L}\\
+\frac{\partial \zeta_g}{\partial t}+\bm{u_g}\cdot\nabla\left(\zeta_g+\beta y\right) = -f_0\nabla\cdot\bm{u_a}
+$$
+
+Apply mass continuity (3.2) now with $\frac{Dh}{Dt}+(h_D+H)\nabla\cdot(\bm{u_g}+\bm{u_a})=0$, therfore $\frac{D}{Dt}(\eta-\eta_B)+H\nabla\cdot\bm{u_a}=0$.
+$$
+\frac{D_g}{Dt}\left(\zeta_g+\beta y-\frac{f_0(\eta-\eta_B)}{H}\right) = 0,\quad \frac{D_g}{Dt} \triangleq \frac{\partial}{\partial t}+\bm{u_g}\cdot\nabla
+$$
+
+Def stream function $\psi$ such that $u_g = -\frac{\partial \psi}{\partial y} = -\frac{g}{f_0}\frac{\partial \eta}{\partial y}, v_g = \frac{\partial \psi}{\partial x}=\frac{g}{f_0}\frac{\partial \eta}{\partial x}$ and hence $\frac{\partial u_g}{\partial x}+\frac{\partial v_g}{\partial y} = 0$
+$$
+\zeta_g = -\frac{\partial u}{\partial y}+ \frac{\partial v}{\partial x} = \nabla^2\psi,\eta = \frac{f_0\psi}{g}
+$$
+
+Then the Potential vorticity equation is
+$$
+\boxed{
+\frac{Dq}{Dt} = 0,\quad q =\nabla^2\psi+\beta y-\frac{\psi}{L_d^2}+\frac{f_0\eta_B}{H}\quad \text{QGPV}\tag{4.4}
+}
+$$
+
+Actually, from potential vorticity (3.6)
+$$
+Q=\frac{\zeta+f}{h} \approx \frac{1}{H}(\zeta+f)(1-\eta_B/H) \approx \frac{1}{H}(\zeta+f_0+\beta y-f_0\frac{\eta_T}{H})
+$$
+
+Using geostrophic balance $\zeta = \nabla^2\psi$ and $\eta_T = \frac{f_0\psi}{g}$, same to QGPV (4.4).
+Indeed both the PG and QG equations can be written in PV. But in PG relative vorticity is ignored ($Q=f/h$) and in QG height variations are ignored ($q =\zeta+\beta y-\frac{f_0\eta_T}{H}$). 
+
+
+
+## 4.3 Scaling in the Continuously-Stratified System
+Apply same scaling above to the stratified primitive equation like Boussinesq equations.
+From (2.3), hydrostatic Boussinesq equations:
+$$
+\frac{D\bm{u}}{Dt}+\bm{f}\times\bm{u} = -\nabla_z\phi\\
+\frac{\partial\phi}{\partial z} = b,\frac{Db}{Dt} = 0,\nabla\cdot\bm{v} =0
+$$
+
+Def $b(x,y,z,t) = \tilde{b}(z)+b'(x,y,z,t)$, therefore
+$$
+\frac{Db'}{Dt}+N^2w = 0,\quad N^2=\frac{\partial \tilde{b}}{\partial z}
+$$
+
+Let $\phi = \tilde{\phi}(z)+\phi'$, and $\frac{\partial \phi'}{\partial z}\triangleq b'$. Scaling $(x,y)=L(\hat{x},\hat{y})$, $(u,v) = U(\hat{u},\hat{v})$, $t\sim L/U$, $z\sim H$, $f\sim f_0$, $N\sim N_0$. Still let $R_o = \frac{U}{fL}\ll 1$, therefore $\bm{f}\times\bm{u} \sim \nabla_z\phi'$, $\phi'\sim\Phi =  f_0UL$, $b' \sim B= f_0UL/H$, $\frac{\partial b'/\partial z}{N^2} \sim f_0UL/H^2N^2=R_o\frac{L^2}{L_d^2}$, $L_d = \frac{NH}{f_0}$ is the deformation radius in the continuous stratified fluid (compared with shallow water systems $L_d = \frac{\sqrt{gH}}{f_0}$).
+
+$L_d\sim 1000$ km in atmosphere but $L_d \sim 100$ km in ocean. Therefore PGPV is used in ocean but QGPV is used in atmosphere more.
+
+Scaling the equations:
+$$
+R_o\frac{D\bm{\hat{u}}}{D\hat{t}}+\hat{\bm{f}}\times\hat{\bm{u}} = -\nabla_z\hat{\phi}\tag{4.5}\\
+\frac{\partial\hat{\phi}}{\partial \hat{z}} = \hat{b},R_o\frac{Db'}{Dt}+\frac{L_d^2}{L^2}\hat{N}^2\hat{w} = 0,\nabla\cdot\hat{\bm{v}} =0
+$$
+
+
+## 4.4 Planetary-Geostrophic Equations for Stratified Fluids
+
+$R_o\ll1$, and $L/L_d\gg1$, such that $R_o(\frac{L}{L_d})^2=O(1)$. Therefore (4.5) becomes
+$$
+\bm{f}\times\bm{u}=-\nabla\phi,\frac{\partial\phi}{\partial z} = b,\frac{Db}{Dt} = 0,\nabla\cdot\bm{v} =0
+$$
+
+Potential vorticity
+$$
+\boxed{
+\frac{DQ}{Dt} = 0，Q =f\frac{\partial b}{\partial z}\quad\text{PGPV}
+}\tag{4.6}
+$$
+
+
+
+
+## 4.5 Quasi-Geostrophic Equations for Stratified Fluids
+$R_o\ll1$, and $L/L_d =O(1)$, such that $R_o(\frac{L}{L_d})^2\ll 1$.
+
+Similarly to 4.2.2, begin with 3 assumptions:
+1. $R_o\ll 1$;
+2. $\frac{L}{L_d} =O(1)$, s.t. $R_o(\frac{L}{L_d})^2\ll 1$;
+3. variations of the coriolis parameter are small, so that $f=f_0+\beta y$, and $\beta y\ll f_0$
+Begin from shallow water vorticity equation before applying (2.5) on horizontal plane:
+$$
+\frac{D\bm{u}}{Dt}+\bm{f}\times\bm{u} = -\nabla_z \phi\\
+\frac{D\bm{u_g}+\bm{u_a}}{Dt}+(\bm{f_0+\beta y})\times(\bm{u_g}+\bm{u_a}) = -\nabla_z (\tilde{\phi}(z)+\phi')\\
+\text{Def stream function}\quad \psi =\frac{\phi'}{f_0} , u_g =-\frac{\partial \psi}{f_0\partial y}, v_g =\frac{\partial \psi}{f_0\partial x}\\
+\frac{D_g\bm{u_a}}{Dt}+(\bm{f_0+\beta y})\times\bm{u_a} = 0\\
+\nabla\times\frac{D_g\bm{u_g}}{Dt}+\nabla\times\left[f_0\hat{k}\times\bm{u_a}+\beta y\hat{k}\times\bm{u_g}\right] = 0\\
+\frac{D_g\zeta_g}{Dt}+ \bm{u_g}\cdot\nabla (\beta y) = -f_0\nabla\cdot\bm{u_a}\\
+\frac{D_g}{Dt}(\zeta_g+\beta y)= f_0\frac{\partial w}{\partial z} = -f_0\frac{\partial }{\partial z}\frac{\frac{Db'}{Dt}}{N^2} = -f_0\frac{\partial }{\partial z}\frac{D}{Dt}\frac{\partial \phi'}{N^2\partial z}\\
+\frac{D_g}{Dt}(\zeta_g+\beta y)=-\frac{D_g}{Dt}\frac{\partial f_0^2}{\partial z}\frac{\partial \psi}{N^2\partial z},\zeta_g = \nabla^2\psi\\
+\boxed{
+\frac{D_gq}{Dt}=0,\quad q= \nabla^2\psi+\beta y+ \frac{\partial }{\partial z}\left(\frac{f_0^2}{N^2}\frac{\partial \psi}{\partial z}\right)\quad\text{QGPV}\tag{4.7}
+}
+$$
+
+Finally, if allow density to vary in the vertical (like atmosphere), the Quasi-Geostrophic Potential Vorticity is given by
+$$
+q= \nabla^2\psi+f+\frac{f_0^2}{\tilde{\rho}(z)}\frac{\partial }{\partial z}\left(\frac{\tilde{\rho}(z)}{N^2}\frac{\partial \psi}{\partial z}\right)
+$$
+
+> NOTE: The closed equations of dynamics including momentum equation and mass continuity have become a single Potential Vorticity with only an unknown variables, i.e. stream funtion $\psi$. Therefore, all variables can be solved with knowing the boundary conditions and relations to other variables.
+
+### 4.5.3 Upper and Lower Boundary Conditions and Buoyancy Advection
+
+$$
+\frac{Db'}{Dt} = \frac{D}{Dt}\left(f_0\frac{\partial \psi}{\partial z}\right)= -N^2w = 0, z=0,H
+$$
+If the bottom is not flat, therfore 
+$$
+\frac{D}{Dt}\left(f_0\frac{\partial \psi}{\partial z}\right)+N^2w = 0, w = \bm{u}\cdot\nabla \eta_B, z=0
+$$
+
+## 4.6 The Two-Level Quasi-Geostrophic Equations
+$$
+q= \nabla^2\psi+\beta y+ \frac{\partial }{\partial z}\left(\frac{f_0^2}{N^2}\frac{\partial \psi}{\partial z}\right)
+$$
+Apply to at the two levels 1 and 2. $N=constant$ and $H_1=H_2=H/2$, therefore
+$$
+q_1= \nabla^2\psi_1+\beta y+ \frac{f_0^2}{N^2}\frac{1}{H/2}\left[\left(\frac{\partial \psi_1}{\partial z}\right)_{top} - \frac{\psi_1-\psi_2}{H/2}\right]
+$$
+
+No heaing and set $\frac{D}{Dt}(\frac{\partial \psi}{\partial z})_{top} = 0$, therefore 
+$$
+\frac{Dq_1}{Dt} = 0,\quad q_1= \nabla^2\psi_1+\beta y+ \frac{k_d^2}{2}(\psi_2-\psi_1),k_d^2 = \frac{8f_0^2}{N^2H^2}
+$$
+
+For lower layer 2, similarly
+$$
+\frac{Dq_2}{Dt} = 0,\quad q_2= \nabla^2\psi_1+\beta y+ \frac{k_d^2}{2}(\psi_1-\psi_2)+ \text{topography}(\frac{f_0\eta_B}{H}),k_d^2 = \frac{8f_0^2}{N^2H^2} 
+$$
+
+## 4.7 Frictional Geostrophic Balance and Ekman Layers
+
+# 5. Rossby Waves
+Rossby waves are the most prominent wave in the atmosphere and ocean on large scales, although gravity waves sometimes rival them. They can best be described using the quasi-geostrophic equations.
+## 5.1 Rossby Wave Essentials
+### 5.1.1 The Linear equation of motion
+inviscid, adiabatic, QGPV equation:
+$$
+\frac{\partial q}{\partial t}+\bm{u}\cdot\nabla q=0\tag{5.1}
+$$
+
+Divide the field into time-independent mean component (basic state) and perturbation, with the perturbuation small than mean flow.
+$$
+\bm{\bar{u}} = (\bar{u},\bar{v}) = (\bar{u}(y,z),0)\\
+q = \bar{q}(y,z) + q'(x,y,z,t) ,\psi = \bar{\psi}(y,z)+\psi'(x,y,z,t), \bar{u}=-\frac{\partial \bar{\psi}}{\partial y}
+$$
+
+From (5.1), there is
+$$
+\frac{\partial q'}{\partial t}+ \bm{\bar{u}}\cdot\nabla  \bar{q}+\bm{u'}\cdot\nabla \bar{q}+\bm{\bar{u}}\cdot\nabla q'+\bm{u'}\cdot\nabla q' = 0
+$$
+Assuming the basic state is still a solution of the equation, that is $\frac{\partial \bar{q}}{\partial t}+\bm{\bar{u}}\cdot\nabla \bar{q} =\bm{\bar{u}}\cdot\nabla \bar{q}=0$. And $\bar{v}=0,\frac{\partial \bar{q}}{\partial x} = 0$, therefore
+$$
+\boxed{
+\frac{\partial q'}{\partial t}+\bar{u}\frac{\partial q'}{\partial x}+v'\frac{\partial \bar{q}}{\partial y}=0\tag{5.2}
+}
+$$
+
+Consider a shallow water system QGPV, ignoring bottom topography, there is
+$$
+q = \nabla^2\psi +\beta y-\frac{\psi}{L_d^2}
+$$
+
+Remember that for quasi-geostrophic situation, $L\ll L_d$, therefore assume $L_d\rightarrow\infty$, put the $q$ into (5.2), and for a constant zonal flow $u(y,z)=U$, that is
+$$
+\frac{\partial}{\partial t}\nabla^2\psi'+\bar{u}\frac{\partial }{\partial x}\nabla^2\psi'+\beta\frac{\partial \psi'}{\partial x}=0
+$$
+
+Trial solution $\psi' = \mathrm{Re}\tilde{\psi}\mathrm{e}^{i(kx+ly-\omega t)}$, therefore
+$$
+(-\omega +kU)(-k^2-l^2)+\beta k=0\\
+\boxed{
+\omega = Uk-\frac{\beta k}{k^2+l^2}\quad \text{Dispersion relation for barotropic Rossby waves}
+}\\
+c_p^x \triangleq \frac{\omega}{k} = U-\frac{\beta}{k^2+l^2},\quad c_p^y \triangleq \frac{\omega}{l} = U\frac{k}{l}-\frac{\beta k}{(k^2+l^2 )l}\\
+c_g^x \triangleq \frac{\partial \omega}{\partial k} = U+\frac{\beta(k^2-l^2)}{(k^2+l^2)^2},\quad c_g^y \triangleq \frac{\partial \omega}{\partial l} = \frac{2\beta kl}{(k^2+l^2 )^2}
+$$
+
+The phase speed in the absence of a mean flow is **westward**.
+
+For a **finite deformation radius**, assume basic state is $\Psi = -Uy$, which is still a solution of the equations, therefore assume $q=\bar{q}+q' = q = (\nabla^2\Psi +\beta y-\frac{\Psi}{L_d^2}) + (\nabla^2\psi'-\frac{\psi'}{L_d^2})$, therefore (5.2) becomes
+$$
+(\frac{\partial}{\partial t}+U\frac{\partial }{\partial x})\nabla^2\psi'+(\beta+\frac{U}{L_d^2})\frac{\partial \psi'}{\partial x}=0\\
+\boxed{
+\omega = Uk-l\frac{\frac{U}{L_d^2}+\beta}{\frac{1}{L_d^2}+k^2+l^2}
+}
+$$
+
+No longer a single Doppler shift nor a phase speed since $L_d$ changes the basic potential vorticity gradient $\nabla \psi$, therefore influence the velocity.
+
+
+## 5.2 Rossby Waves in Stratified Quasi-Geostrophic Flow
+### 5.2.1 Dispersion relation and group velocity
+Similarly to section 5.1. With a constant mean zonal flow $U$, but with $q= \nabla^2\psi+\beta y+ \frac{\partial }{\partial z}\left(\frac{f_0^2}{N^2}\frac{\partial \psi}{\partial z}\right)$, into (5.2), that is
+$$
+(\frac{\partial}{\partial t}+U\frac{\partial }{\partial x})\left[\nabla^2\psi'+ \frac{\partial }{\partial z}\left(\frac{f_0^2}{N^2}\frac{\partial \psi'}{\partial z}\right)\right]+\beta\frac{\partial \psi'}{\partial x}=0
+$$
+
+Suppose that $\frac{f_0^2}{N^2}$ does note vary with $z$, trial solution $\psi' = \mathrm{Re}\tilde{\psi}\mathrm{e}^{i(kx+ly-\omega t)}$, therefore
+$$
+\boxed{
+\omega = Uk-\frac{\beta k}{k^2+l^2+m^2f_0^2/N^2}
+}
+$$
+
+In reality, there is boundary condition at the top and bottom of the fluid from
+$$
+\frac{Db'}{Dt} + N^2w = (\frac{\partial }{\partial t}+U\frac{\partial }{\partial x}) (f\frac{\partial \psi'}{\partial z}) = (-\omega+Uk)m\psi'=0,z=0,H\\
+\psi' = \mathrm{Re}\tilde{\psi}\mathrm{e}^{i(kx+lt-\omega t)}\cos(\frac{m_j\pi z}{H}), m_j = 1,2,dots
+$$
+### 5.2.2 Vertical propagation of Rossby waves
+From the dispersion relationship, there is
+$$
+m^2 = \frac{N^2}{f_0^2}(\frac{\beta}{U-c}-(k^2+l^2)), c=c_p^x= \frac{\omega}{k}
+$$
+
+For waves to propagate **upwards** require that $m^2>0$, therefore 
+$$
+0< U-c<\frac{\beta}{k^2+l^2}
+$$
+
+For stationary waves ($c_p^x = c=0$), there is
+$$
+0< U<\frac{\beta}{k^2+l^2}
+$$
+
+For a given eastward $U$, only long waves (i.e. $k,l$ enough big) can penetrate vertically, called Charney-Drazin filtering.
+
+
+
+# 6. Gravity Waves
+
+
+# 7. Instability
+
+## 7.1 Kelvin-Helmholtz Instability
+Consider a constant-density flow with a shear perpendicular to the fluid’s mean velocity, this being an example of a Kelvin-Helmholtz instability and of a **barotropic instability**.
+
+
+
+## 7.2 Instability of Parallel Shear Flow
+Consider the instability of parallel shear flows.
+- The instability is an example of **barotropic instability**. Barotropic instability arises when a flow is unstable by virtue of its **horizontal shear**, with gravitational and buoyancy effects being secondary.
+- The instability is in many ways analogous to **baroclinic instability**, which is the main instability giving rise to **weather systems** in the atmosphere and similar phenomena in the ocean.
+
+Start with a **2d** (**$h = Constant$**), **incompressible** flow. From (5.2), that is
+$$
+\frac{\partial q'}{\partial t}+\bar{u}\frac{\partial q'}{\partial x}+v'\frac{\partial \bar{q}}{\partial y}=0
+$$
+
+Suppose basic state $\bar{\bm{u}} = U(y)\hat{i}$, $\zeta =\hat{k}\cdot(\nabla\times\bm{u})$, $q = \frac{\zeta+f}{h}$ (shallow water system).
+$$
+\frac{\partial \zeta'}{\partial t}+U\frac{\partial \zeta'}{\partial x}+v'(-\frac{\partial^2 U}{\partial y^2}+\beta)=0
+$$
+
+
+Mass continuity $\nabla \cdot \bm{u} = \nabla\cdot \bm{u}' = \frac{\partial u'}{\partial x}+\frac{\partial v'}{\partial y} = 0$. Therefore define stream function $\psi$ such that $u' = -\frac{\partial \psi'}{\partial y},v'=\frac{\partial \psi'}{\partial x}, \zeta =\nabla^2\psi$. Therefore
+$$
+(\frac{\partial}{\partial t}+U(y)\frac{\partial}{\partial x})\nabla^2\psi'+(\beta-\frac{\partial^2 U(y)}{\partial y^2})\frac{\partial \psi'}{\partial x}=0
+$$
+
+Trial solution $\psi' = \mathrm{Re}\tilde{\psi}(y)\mathrm{e}^{ik(x-ct)}$, therefore
+$$
+\boxed{
+(U-c)(\tilde{\psi}_{yy}-k^2\tilde{\psi})+(\beta-U_{yy})\tilde{\psi}=0
+} \quad \text{Rayleigh-Kuo Equation}
+$$
+### 7.2.1 Instability of Parallel Shear Flow: Piecewise Linear Flows
+To solve this linear equations, consider two physical conditions:
+- **Normal stress should be continuous across the interface**. For an inviscid fluid this implies that pressure be continuous.
+- **Normal velocity** of the fluid on either side of the interface should be **consistent with the motion of the interface** itself. 
+
+(i) Continuity of pressure
+linearized Momentum equation (x-direction) is
+$$
+\frac{\partial u'}{\partial t}+U\frac{\partial u'}{\partial x}+v'\frac{\partial U}{\partial y}=-\frac{\partial p'}{\partial x}\\
+u'=-\tilde{\psi}_ye^{ik(x-ct)}, v'=ik\tilde{\psi} e^{ik(x-ct)},p'=\tilde{p}e^{ik(x-ct)}\\
+ik(U-c)\tilde{\psi}_y+ik\tilde{\psi}U_y=ik\tilde{p}\\
+\Delta\left[(U-c)\tilde{\psi}_y+\tilde{\psi}U_y\right] = 0 \quad \text{Pressure coutinuous across interface}
+$$
+
+(ii) Material interface condition
+Velocity $v$ is given by kinematic condition
+$$
+v=\frac{D\eta}{Dt} = \frac{\partial \eta'}{\partial t}+U\frac{\partial\eta'}{\partial x} = \frac{\partial \psi'}{\partial x}\\
+(U_1-c)\tilde{\eta} = \tilde{\psi}_1,(U_2-c)\tilde{\eta} = \tilde{\psi}_2,\\
+\Delta \left(\frac{\tilde{\psi}}{U-c}\right) = 0 \quad \text{Material coutinuous across interface}
+$$
+
+### 7.2.2 Kelvin-Helmholtz Instability
+Consider the situation as below:
+$$
+\left\{
+\begin{aligned}
+U_1(y) &= U_1 = U,\quad y>0\\
+U_2(y) &= U_2 = -U,\quad y<0
+\end{aligned}
+\right.
+$$
+From Rayleigh-Kuo euqation on either side of the interface with f-plane $\beta = 0$, therefore
+$$
+(U_i-c)(\partial_{yy}\tilde{\psi}_i-k^2\tilde{\psi}_i)=0
+$$
+
+Assuming that $U_i\ne c$, therefore solution of this equation that decay away on either side of the interface are
+$$
+\left\{
+\begin{aligned}
+\tilde{\psi}_1(y) &= \Psi_1 e^{-ky},\quad y>0\\
+\tilde{\psi}_2(y) &= \Psi_2 e^{ky},\quad y<0
+\end{aligned}
+\right.
+$$
+Therefore boundary condition 1 and 2 gives
+$$
+(U_1-c)(-k)\Psi_1= (U_2-c)(k)\Psi_2,\quad \frac{\Psi_1}{U_1-c} = \frac{\Psi_2}{U_2-c}\\
+(U_1-c)^2 = -(U_2-c)^2,\rightarrow c^2=-U^2,\rightarrow c=\pm iU\\
+\psi' = \mathrm{Re}\tilde{\psi}(y)\mathrm{e}^{ik(x-ct)} = \tilde{\psi}(y)e^{kUt}\mathrm{Re}e^{ikx}\quad \text{All wavelengths are unstable}
+$$
+
+### 7.2.3 Edge Waves
+Consider the situation as below:
+$$
+\left\{
+\begin{aligned}
+U_1(y) &= U_1 = U_0-ky,\quad y\le0\\
+U_2(y) &= U_2 = U_0+ky,\quad y<0
+\end{aligned}
+\right.
+$$
+From Rayleigh-Kuo euqation on either side of the interface with f-plane $\beta = 0$, therefore
+$$
+(U_i-c)(\partial_{yy}\tilde{\psi}_i-k^2\tilde{\psi}_i)=0
+$$
+
+Assuming that $U_i\ne c$, therefore solution of this equation that decay away on either side of the interface are
+$$
+\left\{
+\begin{aligned}
+\tilde{\psi}_1(y) &= \Psi_1 e^{-ky},\quad y>0\\
+\tilde{\psi}_2(y) &= \Psi_2 e^{ky},\quad y<0
+\end{aligned}
+\right.
+$$
+Therefore boundary condition 1 and 2 gives
+$$
+(U_0-c)(-k)\Psi_1-\Psi_1\partial_yU_1= (U_0-c)(k)\Psi_2-\Psi_2\partial_yU_1,\quad \frac{\Psi_1}{U_0-c} = \frac{\Psi_2}{U_0-c}\\
+-k(U_0-c)-\partial_yU_1 = k(U_0-c)-\partial_yU_2,\rightarrow c=U_0+\frac{\partial_yU_1-\partial_yU_2}{2k}\\
+$$
+
+The dispersion is analogous to the rossby wave dispersion, while $U$ is the basic state, added by a vorticity gradient (planetary $\beta y$ and basic state velocity $\partial_y U_1-\partial_y U_2$)
+
+### 7.2.4 Interacting Edge Waves Producing Instability
+Consider a slightly more complicated case in which edge waves may interact giving rise to an instability.
+$$
+U=
+\left\{
+\begin{aligned}
+& U_1 = U_0,&&\quad a<y\le b\\
+& U_2 = \frac{U_0}{a}y,&&\quad -a<y<a\\
+& U_3 = -U_0,&&\quad -b\le y<-a
+\end{aligned}
+\right.
+$$
+From Rayleigh-Kuo euqation on either side of the interface with f-plane $\beta = 0$, therefore
+$$
+(U_i-c)(\partial_{yy}\tilde{\psi}_i-k^2\tilde{\psi}_i)=0
+$$
+
+Assuming that $U_i\ne c$, therefore solution of this equation that decay away on either side of the interface are
+$$
+\left\{
+\begin{aligned}
+\tilde{\psi}_1(y) &= A e^{-k(y-a)},&&\quad y>a\\
+\tilde{\psi}_2(y) &= B e^{k(y-a)}+C e^{-k(y+a)},&&\quad -a<y<a\\
+\tilde{\psi}_3(y) &= D e^{k(y+a)},&&\quad y<-a\\
+\end{aligned}
+\right.
+$$
+Therefore boundary condition 1 and 2 at interfaces $y=\pm a$ gives
+$$
+(U_0-c)(-k)A= B\left[(U_0-c)(k)- \frac{U_0}{a}\right]+ Ce^{-2ka}\left[(U_0-c)k+ \frac{U_0}{a}\right]\\
+A = B+Ce^{-2ka}\\
+(U_0-c)(k)D= B^{-2ka}\left[(U_0+c)(k)+\frac{U_0}{a}\right]+ C\left[-(U_0+c)k+\frac{U_0}{a}\right]\\
+D= Be^{-2ka}+C
+$$
+
+For non-trivial solutions require dispersion relationship
+$$
+c^2 = (\frac{U_0}{2ka})^2\left[(1-2ka)^2-e^{-4ka}\right]
+$$
+
+$ka<0.63293$ instability.
+
+
+## 7.3 Necessary Conditions for Barotropic Instability
+Derive a necessary condition for instability, or sufficient conditions for stability
+### 7.3.1 Necessary Condition for Instability: Rayleigh’s Criterion
+With a $\beta$-plane, the vorticity equation is
+$$
+\frac{\partial \zeta'}{\partial t}+U\frac{\partial \zeta'}{\partial x}+v'(\beta-\frac{\partial^2 U}{\partial y^2})=0
+$$
+
+Muitiple by $\frac{\zeta'}{Q_y}=\frac{\zeta'}{\beta-\frac{\partial^2 U}{\partial y^2}}$, there is
+$$
+\frac{\partial }{\partial t}\left(\frac{\zeta'^2}{Q_y}\right)+\frac{U}{Q_y}\frac{\partial \zeta'^2}{\partial x}+2v'\zeta' = 0
+$$
+
+Integrating with respect ot $x$, assuming $\zeta$ vanishes at boundary,gives
+$$
+\int \frac{\partial }{\partial t}\left(\frac{\zeta'^2}{Q_y}\right)dx = -2\int v'\zeta'dx
+$$
+
+2d mass continuity $\nabla\cdot\bm{u'}=0$, and $\zeta' = -\frac{\partial u'}{\partial y}+\frac{\partial v'}{\partial x}$, there is
+$$
+v'\zeta' = v'(-\frac{\partial u'}{\partial y}+\frac{\partial v'}{\partial x}) -u'(\frac{\partial u'}{\partial x}+\frac{\partial v'}{\partial y})=-\frac{\partial}{\partial y}(u'v')+\frac{1}{2}\frac{\partial}{\partial x}(v'^2-u'^2) = \nabla\cdot (\frac{1}{2}(v'^2-u'^2)\hat{i}-u'v'\hat{j})
+$$
+
+Therefore
+$$
+\iint \frac{\partial }{\partial t}\left(\frac{\zeta'^2}{Q_y}\right)dxdy = -2\iint v'\zeta'dxdy = -2\iint \nabla\cdot (\frac{1}{2}(v'^2-u'^2)\hat{i}-u'v'\hat{j})dxdy = 0\\
+\frac{d}{dt}\iint \left(\frac{\zeta'^2}{Q_y}\right)dxdy = 0
+$$
+
+For instability, $\zeta'$ grows with time, but the integral is identically zero. Therefore $Q_y = \beta -U_{yy}$ must change sign somewhere in the domain.
+
+**Rayleigh-Kuo inflection-point criterion**: A necessart condition for instability is that $\beta-U_{yy}$ change sign somewhere in the domain.
+
+
+## 7.4 Baroclinic Instability
+
+### 7.4.1 Release of Potential Energy
+
+
+
+### 7.4.2 Linearized Quasi-Geostrophic Equations
+For **Boussinesq** fluid, the potential vorticity under **quasi-geostrophic** situation is
+$$
+\frac{\partial q}{\partial t}+\bm{u}\cdot\nabla q = 0, 0<z<H,\quad q=\nabla^2\psi+f+\frac{\partial}{\partial z}(\frac{f_0^2}{N^2}\frac{\partial \psi}{\partial z})\\
+\frac{\partial b}{\partial t}+\bm{u}\cdot\nabla b = 0, z=0,H, \quad b=f_0\frac{\partial \psi}{\partial z}
+$$
+
+A solution of equations is a purely zonal flow $\bm{u}=U(y,z)\hat{i}$, with a corresponding temperature field given by thermal wind balance. The potential vorticity of this basic state is
+$$
+Q= \beta y-\frac{\partial U}{\partial y}+\frac{\partial}{\partial z}(\frac{f_0^2}{N^2}\frac{\partial \Psi}{\partial z}), U =-\frac{\partial \Psi}{\partial y}
+$$
+
+Linearzing the PV equation is
+$$
+\frac{\partial q'}{\partial t}+U\frac{\partial q'}{\partial x}+v'\frac{\partial Q}{\partial y}=0, 0<z<H, \quad q' = \nabla^2\psi'+\frac{\partial}{\partial z}(\frac{f_0^2}{N^2}\frac{\partial \psi'}{\partial z}), v'=\partial_x \psi'\\
+\frac{\partial b'}{\partial t}+U\frac{\partial b'}{\partial x}+v'\frac{\partial B}{\partial y}=0, z=0,H,\quad b' = f_0\partial_z\psi',\partial_y B = f_0\partial_y\partial_z\Psi = -f_0\partial_z U
+$$
+
+Trial solution $\psi'(x,y,z,t) = \mathrm{Re}\tilde{\psi}(y,z)e^{ik(x-ct)}$, therefore ${q'} = \mathrm{Re}\tilde{q}e^{ik(x-ct)}$, $\tilde{q} = (\partial_y^2-k^2)\tilde{\psi}+\frac{\partial}{\partial z}(\frac{f_0^2}{N^2}\frac{\partial \tilde{\psi}}{\partial z})$.
+Therefore the linearized PV equations are
+$$
+\boxed{
+\begin{gathered}
+(U-c)\left[(\partial_y^2-k^2)\tilde{\psi}+\partial_z(\frac{f_0^2}{N^2}\partial_z \tilde{\psi})\right]+\tilde{\psi}\partial_y Q = 0, 0<z<H\\
+(U-c)\partial_z\tilde{\psi}-\tilde{\psi}\partial_zU = 0,z=0,H
+\end{gathered}
+}
+$$
+
+
+## 7.5 The Eady Problem
+Assumptions:
+1. The motion is on the f-plane ($\beta = 0$).
+2. Fluid is uniformly stratified; that is, $N^2$ is a constant. Suitable for atmosphere.
+3. Basic state: $U_0(z) = \Lambda z = \frac{Uz}{H}$, sutiable for atmosphere more.
+4. Between two rigid, flat horizontal surfaces.
+
+
+### 7.5.1 The Eady Problem: the Linearized Problem
+From the assumption (3), $\Psi = -\Lambda zy$, therefore the basic potential vorticity $Q = 0$. Into linearized PV equation, there is
+$$
+(\Lambda z-c)\left[(\partial_y^2-k^2)+\frac{H^2}{L_d^2}\partial_z^2 \right]\tilde{\psi} = 0, 0<z<H\\
+(\Lambda z-c)\partial_z\tilde{\psi}-\Lambda\tilde{\psi} = 0,z=0,H
+$$
+
+Assume periodic boundary condition at y-direction, that is $\psi' = \mathrm{Re}\tilde{\psi}(y,z)e^{ik(x-ct)} = \mathrm{Re}\Phi(z)\sin ly e^{ik(x-ct)}, l = \frac{n\pi}{L}, n=1,2,dots$. Therefore
+$$
+(\Lambda z-c)\left[\frac{H^2}{L_d^2}\frac{d^2 \Phi}{dz^2}-(l^2+k^2)\Phi \right] = 0, 0<z<H\\
+(\Lambda z-c)\frac{d\Phi}{dz}-\Lambda\Phi = 0,z=0,H
+$$
+
+If $\Lambda H-c\ne 0$, there is 
+$$
+H^2\frac{d^2 \Phi}{dz^2}-\mu^2\Phi  = 0, \mu^2 = L_d^2(k^2+l^2)\quad \text{Horizontal wavenumber}\\
+\Phi(z) = A\cosh (\mu\hat{z})+B\sinh (\mu\hat{z}), \hat{z} = \frac{z}{H}
+$$
+
+Back into boundary conditions, there is 
+$$
+\Lambda H A + \mu c B =0\\
+\left[(c-\Lambda H)\mu \sinh\mu+\Lambda H \cosh\mu\right]A+\left[(c-\Lambda H)\mu \cosh\mu+\Lambda H \sinh\mu\right]B = 0
+$$
+
+For non trivial solution,
+$$
+c^2-Uc+U^2(\mu^{-1}\coth \mu -\mu^{-2})=0\\
+c=\frac{U}{2}\pm \frac{U}{\mu}\left[(\frac{\mu}{2}-\coth \frac{\mu}{2})(\frac{\mu}{2}-\tanh \frac{\mu}{2})\right]^{1/2}
+$$
+
+Insibility $\mu<\mu_c = 2.399$, $k<k_c = \frac{\mu_c}{L_d} = \frac{2.4}{L_d}$, $\lambda>\lambda_c = \frac{2\pi L_d}{\mu_c} = 2.6L_d$, and maximum growth rate occurs when $\mu = \mu_m = 1.61$, $k_m = \frac{\mu_m}{L_d} = \frac{1.61}{L_d}$, $\lambda_m = \frac{2\pi L_d}{\mu_m} = 3.9L_d$.
+
+
+## 7.6 Two-Level Baroclinic Instability
+Include $\beta$-effect.
+
+### 7.6.1 Two-level Baroclinic Instability: The Phillips Problem
+
+$$
+\frac{D}{Dt}\left[\nabla^2\psi_i+\beta y+ \frac{k_d^2}{2}(\psi_j-\psi_i)\right] = 0,i=1,2,j=3-i, k_d^2 = \frac{8f_0^2}{N^2H^2} = \frac{\sqrt{8}}{L_d},L_d =\frac{NH}{f_0}
+$$
+
+Basic state: $\Psi_1 = -U_1 y, \Psi_2 = -U_2 y =U_1y$. Choose $U_2=−U_1 = -U$ without loss of generality. The basic state potential vorticity is $Q_1 = \beta y+k_d^2Uy$, $Q_2 = \beta y-k_d^2Uy$
+> NOTE: even no $\beta$, the potential vorticity is non-zero, differenting from the Eady problem. That is because vertical boundary conditions.In the two-layered formulation the temperature gradient at the boundary is absorbed into the definition of the potential vorticity in the interior. This result in a non-zero interior potential vorticity gradient at the two levels adjacent to the boundary, but with isothermal boundary conditions. In the Eady problem we have a zero interior gradient of potential vorticity but a temperature gradient at the top and bottom boundary.
+
+From (5.2), there is
+$$
+(\frac{\partial}{\partial t}+U_i\frac{\partial }{\partial x})q_i'+v_i'\frac{\partial Q_i}{\partial y}=0, i=1,2\\
+(\frac{\partial}{\partial t}+U\frac{\partial }{\partial x})\left[\nabla^2\psi_1'+ \frac{k_d^2}{2}(\psi_2'-\psi_1')\right]+(\beta+k_d^2U)\frac{\partial \psi_1'}{\partial x}=0\\
+(\frac{\partial}{\partial t}-U\frac{\partial }{\partial x})\left[\nabla^2\psi_2'+ \frac{k_d^2}{2}(\psi_1'-\psi_2')\right]+(\beta-k_d^2U)\frac{\partial \psi_2'}{\partial x}=0
+$$
+
+Trial solution
+$$
+\psi_i' = \mathrm{Re}\tilde{\psi}_i e^{i(kx+ly-\omega t)} = \mathrm{Re}\tilde{\psi}_ie^{ik(x-ct)}e^{ily}, i = 1,2
+$$
+
+### 7.6.2 Two-level Baroclinic Instability: The Solution
+
+$$
+(U-c)\left[-(k^2+l^2)\tilde{\psi_1}+ \frac{k_d^2}{2}(\tilde{\psi}_2-\tilde{\psi}_1)\right]+(\beta+k_d^2U)\tilde{\psi}_1=0\\
+-(U+c)\left[-(k^2+l^2)\tilde{\psi_2}+ \frac{k_d^2}{2}(\tilde{\psi}_1-\tilde{\psi}_2)\right]+(\beta-k_d^2U)\tilde{\psi}_2=0\\
+c=-\frac{\beta}{K^2+k_d^2}\left\{ 1+\frac{k_d^2}{2K^2}\pm \frac{k_d^2}{2K^2}\left[ 1+\frac{4K^4\left(K^4-k_d^4\right)}{k_\beta^4k_d^4}\right]^{1/2} \right\},K^2=k^2+l^2, k_\beta^2 = \frac{\beta}{U}
+$$
+
+Nondimensionalize this equation using the deformation radisu $L_d$ as the length scale and the shear velocity $U$ as the velocity scale. That is
+$$
+k = \frac{\hat{k}}{L_d}, c = \hat{c}U,t= \frac{L_d}{U}\hat{t}\\
+\hat{c}=-\frac{\hat{k_\beta}}{\hat{K}^2+\hat{k_d}^2}\left\{ 1+\frac{\hat{k_d}^2}{2\hat{K}^2}\pm \frac{\hat{k_d}^2}{2\hat{K}^2}\left[ 1+\frac{4\hat{K}^4\left(\hat{K}^4-\hat{k_d}^4\right)}{\hat{k_\beta}^4\hat{k_d}^4}\right]^{1/2} \right\},\hat{k_\beta} = k_\beta L_d,\hat{k_d} = k_dL_d = \sqrt{8}
+$$
+
+1. Zero shear ($U=0$), non-zero $\beta$,
+   $$
+   c = -\frac{\beta}{K^2+k_d^2}\left( 1+\frac{k_d^2}{2K^2}\pm \frac{k_d^2}{2K^2}\right)\\
+   c=-\frac{\beta}{K^2},\tilde{\psi}_1 = \tilde{\psi}_2,\quad \text{or}\quad c= -\frac{\beta}{K^2+K_d^2},\tilde{\psi}_1+\tilde{\psi}_2 = 0
+   $$
+2. Zero $\beta$, non-zero shear,
+   $$
+   c = \pm U\left(\frac{K^2-k_d^2}{K^2+k_d^2}\right)^{1/2}
+   $$
+   Insibility, $K<k_d = \frac{2.82}{L_d}$, and maximum growth rate occurs when $l=0,k_m = \frac{1.79}{L_d}$.
+3. For instability, there must be an inaginary component, that is 
+   $$
+   1+\frac{4K^4\left(K^4-k_d^4\right)}{k_\beta^4k_d^4}<0 \rightarrow k_\beta^4k_d^4 +4K^4(K^4-k_d^4)<0\\
+   K_c = \frac{1}{2}k_d^4\left(1\pm \sqrt{1-k_\beta^4/k_d^4}\right)\\
+   \beta^2k_d^4/U^2 <4K^4(k_d^4-K^4)\le k_d^8\rightarrow k_\beta<k_d\\
+   U_1-U_2=2U>2U_c = \frac{2\beta}{k_d^2} = \frac{1}{4}\beta L_d^2\rightarrow \text{critical shear} \Lambda_c = \frac{U_1-U_2}{H/2} = \frac{\beta HN^2}{2f^2}
+   $$
+   Besides, instability $k_\beta<k_d$ is exactly $\partial_yQ_2=\beta -k_d^2U<0 $, changing sign somewhere in the domain, just like **Rayleigh-Kuo inflection-point criterion** in barotropic instability.
+
+High wavenumber cut-off:
+$$
+4K^4(k_d^4-K^4)> k_\beta^4k_d^4,\rightarrow k_d^4>K^4
+$$
+
+Therefore, waves shorter than deformation radius are always stable.
+Low wavenumber cut-off:
+Suppose $K\ll k_d$, therefore 
+$$
+4K^4(k_d^4-K^4)\approx 4K^4k_d^4> k_\beta^4k_d^4,\rightarrow K^2>\frac{1}{2}k_\beta^2 = \frac{\beta}{2U}
+$$
+
+Therefore unstable waves lie approximately in the interval $\sqrt{\beta/2U}<K<k_d$.
+
+
+
+
+
+## 7.7 Necessary Conditions for Baroclinic Instability
+Similar to barotropic instability,
+$$
+\frac{\partial }{\partial t}\left(\frac{q'^2}{Q_y}\right)+\frac{U}{Q_y}\frac{\partial q'^2}{\partial x}+2v'q' = 0,0<z<H\\
+\frac{\partial }{\partial t}\left(\frac{b'^2}{B_y}\right)+\frac{U}{B_y}\frac{\partial b'^2}{\partial x}+2v'b' = 0, z=0,H\\
+\begin{align*}
+v'q' =& v'(-\frac{\partial u'}{\partial y}+\frac{\partial v'}{\partial x}) -u'(\frac{\partial u'}{\partial x}+v'\frac{\partial v'}{\partial y})+v'\partial_z(f_0b'/N^2)\\
+=&-\frac{\partial}{\partial y}(u'v')+\frac{1}{2}\frac{\partial}{\partial x}(v'^2-u'^2) +\partial_z(f_0v'b'/N^2)-\frac{f_0b'}{N^2}\partial_z\partial_x\psi'\\
+\end{align*}\\
+\text{Zonal average over x}\quad \overline{v'q'} = -\partial_y (\overline{u'v'})+\partial_z(\frac{f_0}{N^2}\overline{v'b'})\\
+\int \overline{v'q'}dydz = \int -\partial_y (\overline{u'v'})dydz+\int \partial_z(\frac{f_0}{N^2}\overline{v'b'})dydz = \int (\frac{f_0}{N^2}\overline{v'b'})|_0^H dy
+$$
+
+Assuming the meridional boundaries are at quiescent latitudes.
+
+Therefore
+$$
+\frac{d }{d t}\iint\left(\frac{\overline{q'^2}}{2Q_y}\right)dydz=-\iint\overline{v'q'} dydz = -\int (\frac{f_0}{N^2}\overline{v'b'})|_0^H dy = -\int \partial_t(\frac{f_0}{N^2}\frac{\overline{b'^2}}{2B_y})|_0^H dy\\
+\frac{d }{d t}\left\{\iint\left(\frac{\overline{q'^2}}{2Q_y}\right)dydz-\int \left[\frac{f_0}{N^2}\frac{\overline{b'^2}}{2B_y})\right]_0^H dy\right\} = 0
+$$
+
+Only $Q_y$ changes the sign in the interior (Phillips problem) or $B_y$ changes sign at the boundary can instability may exist. Using thermal wind relation $f_0\partial_z U = -\partial_y B =B_y$, there is:
+- $Q_y>0$, $U_z(z=0)<0$, and $U_z(z=H)>0$, stability;
+- $Q_y>0$, $U_z(z=0)<0$ or $U_z(z=H)>0$, potential instability, most common;
+- $U_z(z=0)>0$ and $U_z(z=H)<0$, potential instability,
+
+
+# 8. Wave and Mean Flows
+Linear dynamics (previous chapters) is mainly concerned with waves and instabilities that live on a **pre-determined background flow**. But the real world isn’t quite like that. Rather, **the mean state is the result of the combined effects of thermal and mechanical forcings plus the action of the waves and instabilities themselves**. In this chapter we explore the geophysical fluid dynamics underlying such wave – mean-flow interactions.
+
+## 8.1 Quasi-Geostrophic Wave-Mean-flow Interaction
+### 8.1.1 Quasi-Geostrophic Wave–Mean-Flow Interaction: Preliminaries
+
+Boussinesq, quasi-geostrophic potential equation
+$$
+\frac{Dq}{Dt} = (\partial_t+ u\partial_x +v\partial_y)q = \partial_t q+J(\psi,q) = D\\
+u = -\partial_y \psi,v=\partial_x \psi, J(\psi,q) = \partial_x\psi\partial_y q - \partial_y \psi\partial_x q\\
+q = \zeta +\beta y + \partial_z(\frac{f_0^2}{N^2}\partial_z \psi)\\
+b=f_0\partial_z \psi,\zeta = \nabla^2\psi\\
+\partial_t b+J(\psi,b)+wN^2 = S
+$$
+
+In the absence of topography and Ekman friction, $w=0$.
+
+If both $D$ and $S$ are zero, total energy $\hat{E}$ and total enstrophy $\hat{Z}$ are conserved, that is
+$$
+\frac{d\hat{E}}{dt}\triangleq \frac{1}{2}\int_V (\nabla \psi)^2+\frac{f_0^2}{2N^2}(\partial_z\psi)^2dV=0\\
+\frac{d\hat{Z}}{dt}\triangleq \frac{1}{2}\int_V q^2dV=0\\
+$$
+
+### 8.1.2 Potential Vorticity Flux in the Linear Equations
+Let us decompose the fields into a mean (to be denoted with an overbar) plus a perturbation (demoted with a prime), and let us suppose the perturbation fields are of small amplitude. (In the linear problems, such as those considered in last chapter, we decomposed the flow into a “basic state” plus a perturbation, with the basic state fixed in time. Our approach here is similar, but soon we will allow the mean state to evolve.)
+$$
+\partial_t q'+\bar{u}\partial_x q'+u'\partial_x \bar{q}+\bar{v}\partial_y q'+v'\partial_y \bar{q} = D'\\
+(u',v') = (-\partial_y \psi,\partial_x \psi),q' = \nabla^2\psi'+\partial_z(\frac{f_0^2}{N^2}\partial_z \psi')
+$$
+
+If the mean is a zonal mean then $\partial_x \bar{q}=0, \bar{v} =0$, therefore the Linearized QGPV equation is
+$$
+\partial_t q'+\bar{u}\partial_x q'+v'\partial_y \bar{q} = D'\tag{8.1}
+$$
+$$
+\bar{q} = \beta y+\nabla^2 \bar{\psi}+\partial_z(\frac{f_0}{N^2}\bar{b}) = \beta y-\partial_y\bar{u}+\partial_z(\frac{f_0}{N^2}\bar{b})\\
+\partial_y \bar{q} = \beta =\partial_y^2\bar{u}-\partial_z(\frac{f_0^2}{N^2}\partial_z\bar{u})\quad \text{Thermal wind balance:} f_0\partial_z\bar{u}=-\partial_y \bar{b}
+$$
+
+Multiple $q'$ on Linearized QGPV equation and zonally averaging gives
+$$
+\frac{1}{2}\partial_t \overline{q'^2} = -\overline{v'q'}\partial_y \bar{q} + \overline{D'q'}\tag{8.2}
+$$
+
+The first term on the right hand side is downgradient transport of potential vorticity, increasing the variance of the pertubation; the second term is dissipative process.
+
+If the waves are steady statistically (i.e. $\partial_t\bar{q'^2} = 0$) and conservative $D' = 0$, then there must have$\bar{v'q'} = 0$.
+
+Similar results follow for the bouyancy at the boundary
+$$
+\frac{1}{2}\partial_t \overline{b'^2} = -\overline{v'b'}\partial_y \bar{b} + \overline{S'b'}
+$$
+### 8.1.3 Wave-mean-flow interaction
+In linear problems we usually suppose that the mean-flow is fixed and that the zonal mean terms, $\bar{u}$ and $\bar{q}$, are functions only of $y$ and $z$. However, in reality we might expect that the mean-flow would change because of momentum and heat flux convergences arising from the eddy-eddy interactions. 
+
+From the potential vorticity equation, zonal mean plus a eddy term,
+$$
+\left[\partial_t+(\bar{u}+u')\partial_x+(\bar{v}+v')\partial_y\right] (\bar{q}+q') = \bar{D}+D'\\
+\partial_t(\bar{q}+q')+(\bar{u}+u')\partial_x(q')+(\bar{v}+v')\partial_y(\bar{q}+q') = \bar{D}\\
+\partial_t\bar{q}+u'\partial_x q'+\bar{v}\partial_y(\bar{q}+q')+v'\partial_y q' = \bar{D}\\
+u'\partial_x q'+v'\partial_y q' = \partial_x(u'q')-q'\partial_x u'+\partial_y(v'q')-q'\partial_y v'\\
+\partial_t\bar{q} + \bar{v}\partial_y\bar{q}+\bar{v}\partial_y q' + \partial_x(u'q')-q'\partial_x u'+\partial_y(v'q')-q'\partial_y v'= \bar{D}
+$$
+
+Zonal mean and notice that $v' = \partial_x\psi'$,$\bar{v} = 0$, therefore
+$$
+\partial_t\bar{q} + \partial_y(v'q')= \bar{D}\\
+\partial_t\bar{b} + \partial_y(v'b')= \bar{S}
+$$
+
+To obtain $\bar{u}$ from $\bar{q}$ and $\bar{b}$, using thermal wind balance ($f_0\partial_z\bar{u} = -\partial_y \bar{b}$) to define a stream function $\Psi$
+$$
+\left(\bar{u},\frac{\bar{b}}{f_0}\right) = \left(-\partial_z\Psi,\partial_z \Psi\right)\\
+\bar{q}(y,z,t) -\beta y = \partial_z\left(\frac{f_0^2}{N^2}\partial_z\Psi\right)+\partial_y^2\Psi
+$$
+
+There are waves with $\bar{q}$ and eddies with $q'$ in the system. 
+
+
+## 8.2 Potential Vorticity Flux
+Consider some more properties of the waves themselves – how they propagate and what they conserve – beginning with a discussion of the potential vorticity and its relative, the so-called Eliassen-Palm flux.
+$$
+v'q' = v'\zeta'+f_0v'\partial_z(\frac{b'}{N^2})\\
+f_0v'\partial_z(\frac{b'}{N^2})=\partial_z(f_0v'b'/N^2)-\frac{f_0b'}{N^2}\partial_z\partial_x\psi'=f_0\partial_z(v'b'/N^2)-\frac{f_0^2}{2N^2}\partial_x(\partial_z\psi')^2\\
+v'q' = -\frac{\partial}{\partial y}(u'v')+\frac{1}{2}\frac{\partial}{\partial x}(v'^2-u'^2) +\partial_z(f_0v'b'/N^2)-\frac{1}{2N^2}\partial_x(b')^2
+$$
+
+Thus the meridional potential vorticity flux, in the quasi-geostrophic approx, can be written
+$$
+v'q' =\nabla\cdot\bm{E},\quad \bm{E} = \frac{1}{2}(v'^2-u'^2-\frac{b'^2}{N^2})\hat{i}- (u'v')\hat{j}+(\frac{f_0v'b'}{N^2})\hat{k}\\
+\overline{v'q'} = -\partial_y(\overline{u'v'})+\partial_z(\frac{f_0\overline{v'b'}}{N^2}) = \nabla_x\cdot\bm{\mathcal{F}}\\
+\boxed{
+   \bm{\mathcal{F}} = (-\overline{u'v'})\hat{j}+(\frac{f_0\overline{v'b'}}{N^2})\hat{k}\quad \text{Eliassen-Palm flux}}
+$$
+
+### 8.2.1 The Eliassen-Palm Relation
+From (8.2), divided by $\partial_y \bar{q}$, that is
+$$
+\boxed{
+\partial_t \mathcal{P} +\nabla_x\cdot\bm{\mathcal{F}} = \mathcal{D}\quad \text{Eliassen-Plam relation}
+}\\
+\text{Pseudomomentum} \mathcal{P} = \frac{\overline{q'^2}}{2\partial_y \bar{q}},\mathcal{D} =\frac{\overline{D'q'}}{\partial_y\bar{q}} 
+$$
+
+From (8.1)/(5.2), bounessinesq quasi-geostrophic equation on the $\beta$ plane, linearizied around a constant zonal flow and with constant static stability, is
+$$
+\partial_t q'+U\partial_x q'+v'\partial_y \bar{q} = 0\\
+q' = (\nabla^2+\frac{f_0^2}{N^2}\partial_z^2)\psi', \partial_y\bar{q} = \beta\\
+(\partial_t +U\partial_x)(\nabla^2+\frac{f_0^2}{N^2}\partial_z^2)\psi'+\beta \partial_x \psi' = 0
+$$
+
+Trial solutions $\psi' = \mathrm{Re} \tilde{\psi}e^{i(kx+ly+mz-\omega t)}$, Dispersion relation
+$$
+\omega = Uk-\frac{\beta k}{k^2+l^2+m^2f_0^2/N^2} = Uk-\frac{\beta k}{\kappa^2}\\
+c_g^y = \frac{\partial \omega}{\partial l} = \frac{2\beta kl}{\kappa^4},c_g^z = \frac{\partial \omega}{\partial m} = \frac{2\beta kmf_0^2/N^2}{\kappa^4}\\
+\tilde{u} = -il\mathrm{Re}\tilde{\psi},\tilde{u} = ik\mathrm{Re}\tilde{\psi}, \tilde{b} = imf_0\mathrm{Re}\tilde{\psi},\tilde{q} = -\mathrm{Re}\kappa^2\tilde{\psi},\\
+\mathcal{P} = \frac{\overline{q'^2}}{2\partial_y\bar{q}} = \frac{\kappa^4}{4\beta}|\tilde{\psi}|^2\\
+\mathcal{F}^y = -\overline{u'v'} = \frac{1}{2}kl|\tilde{\psi}|^2,\mathcal{F}^z = -f_0\frac{\overline{v'b'}}{N^2} = \frac{f_0^2}{2N^2}km|\tilde{\psi}|^2\\
+\mathcal{F} = (\mathcal{F}^y,\mathcal{F}^z) = (c_g^y,c_g^z)\mathcal{P}\\
+\boxed{
+\partial_t \mathcal{P}+\nabla\cdot (\bm{c_g}\mathcal{P}) = \mathcal{D}\quad \text{Eliassen-Plam relation}
+}
+$$
+
+
+
+## 8.3 The Transformed Eulerian Mean: Quasi-Geostrophic Form
+The so-called transformed Eulerian mean, or TEM, is a transformation of the equations of motion that provides a useful framework for discussing eddy effects under a wide range of conditions. 
+$$
+\left[\partial_t+u\partial_x+v\partial_y+w\partial_z\right]u -fv+u\nabla\cdot \bm(u) =F\\
+\partial_t u+\partial_x(uu)+\partial_y(uv)+\partial_z(uw)-fv=F\\
+\partial_t \overline{u}+\overline{\partial_x uu}+\overline{\partial_y {uv}}+\overline{\partial_z{uw}}-f\overline{v}=\bar{F}\quad \text{zonal average}\\
+\partial_t \bar{u}+\partial_y(\bar{u}\bar{v})+\partial_y(\overline{u'v'})+\partial_y(\bar{u}\bar{w})+\partial_y(\overline{u'w'})-f\bar{v}=\bar{F}\quad \text{mean+perturbution}\\
+\partial_t \bar{u}+\partial_y(\bar{u}\bar{v})+\partial_y(\bar{u}\bar{w})-\bar{u}\nabla\cdot\bm{\bar{u}}+-f\bar{v}=-\partial_y(\overline{u'v'})-\partial_y(\overline{u'w'})+\bar{F}\quad \text{mean+perturbution}\\
+\partial_t\bar{u}+\bar{v}\partial_y\bar{u}+\bar{w}\partial_z\bar{u}-f\bar{v} =-\partial_y(\overline{u'v'})-\partial_y(\overline{u'w'})+\bar{F}\\
+\partial_t\bar{b}+\bar{v}\partial_y\bar{b}+\bar{w}\partial_z\bar{b} =-\partial_y(\overline{b'v'})-\partial_y(\overline{b'w'})+\bar{S}
+$$
+
+Neglect all vertical eddy flux and ageostrophic ($\bar{v}$) since quasi-geostrophic scalin . There is
+$$
+\partial_t\bar{u} = f_0\bar{v}-\partial_y(\overline{u'v'})+\bar{F}\\
+\partial_t\bar{b} = -N^2\bar{w}-\partial_y(\overline{b'v'})+\bar{S}
+$$
+
+Def meridional stream function $\psi_m$,$(\bar{v},\bar{w}) = (-\partial_z\psi_m,\partial_y\psi_m)$. Residual stream function
+$$
+\psi^*\triangleq \psi_m+\frac{1}{N^2}\overline{b'v'}\\
+(\bar{v}^*,\bar{w}^*) = (-\partial_z\psi^*,\partial_y\psi^*) = (\bar{v}-\partial_z(\frac{1}{N^2}\overline{b'v'}), \bar{w}+\partial_y(\frac{1}{N^2}\overline{b'v'}))\\
+\partial_y v^*+\partial_z w^* = 0\\
+\boxed{
+\begin{gathered}
+\partial_t\bar{u} = f_0\bar{v}^*+\overline{v'q'}+\bar{F}\\
+\partial_t\bar{b} = -N^2\bar{w}^*+\bar{S}
+\end{gathered}\quad \text{Transformed Eulerian Mean equation}
+}\\
+f_0\partial_z\bar{u} = -\partial_y\bar{b}\\
+f_0^2\partial_z^2\psi^*+N^2\partial_y^2\psi^* = f_0\partial_z\overline{v'q'}+f_0\partial_z\bar{F}+\partial_y\bar{S}
+$$
+
+
+## 8.4 The Eddy-Driven Ferrel Cell
+
+## 8.5 The Non-Acceleration Result
+
+
+# 9. Tropical Circulation
+
+## 9.1 An observational overview
+
+- width：about 30 degrees in latitude
+- height: 100 hPa or 15 km, close to tropopause
+- strength: $v\sim 1$ m/s, $\omega \sim 10$ hPa/day, $m\sim 1e11$ kg/s
+- timscale: tens of days
+- seasonal cycle: strong with winter cell being much larger than summer cell
+- energy transport: tens of W/m^2, of several 1e15 W
+- connection to eddies: strong interaction between Hadley cells and eddies
+
+## 9.2 An ideal Hadley circulation: Held-Hou model
+Steady, Axisymmetric (neglecting zonal variations, no eddies, no Ferrel cell), Nearly inviscid (drag near the surface is the only important friction), Annual-mean (nos easonal variation), thermal wind balance (for the upper branch of the circulation).
+
+There are three steps:
+1. Angular momentum conservation + thermal wind balance $\rightarrow$ temperature distribution ($theta_M$) in an angular momentum conserving Hadley cell;
+2. Solar radiation distribution at the top of the atmosphere (TOA) $\rightarrow$ radiative equilibrium temperature ($\theta_E$);
+3. Constrain 1: $\theta_M =\theta_E$ at the edge of the Hadley cell;
+   Constrain 2: Energy conservation, i.e., energy is transport from one region to the other region by the Hadley cell, but the total energy is conserved;
+
+**Angular momentum**
+$$
+m = (u+\Omega a\cos\theta)a\cos\theta\\
+\Omega a^2 = (u+\Omega a\cos\theta)a\cos\theta,\quad u = \Omega a\frac{\sin^2\theta}{\cos\theta}\\
+f_0\partial_z u  = 2\Omega\sin\theta\partial_z u= -\partial_y \theta\\
+\int_0^H2\Omega\sin\varphi\partial_z u dz = -\int_0^H\frac{\partial}{\partial y} \frac{g\delta\theta}{\theta_0}dz\\
+\text{Def}\bar{\theta} = \frac{1}{H}\int_0^H \delta\theta dz\\
+2\Omega\sin\varphi \Omega a\frac{\sin^2\varphi}{\cos\varphi} = -\frac{gH}{\theta_0}\partial_y\bar{\theta}\\
+2\Omega^2\frac{y^3}{a^2} = -\frac{gH}{\theta_0}\partial_y\bar{\theta}, (\sin\varphi\approx \varphi \approx \frac{y}{a})\\
+\partial_y\bar{\theta} = -\frac{2\Omega^2y^3\theta_0}{a^2gH}\\
+\bar{\theta_M} = \bar{\theta_M}(0) -\frac{\Omega^2\theta_0}{2gHa^2}y^4
+$$
+**Solar radiation**
+$$
+\bar{\theta_E} = \bar{\theta_E}(0)-\Delta\theta (\frac{y}{a})^2
+$$
+
+At the boundary of Hadley cells $Y_H$: $\bar{\theta_E}(Y_H) = \bar{\theta_M}(Y_H)$; energy conservation: $\int_0^{Y_H} \bar{\theta_E}dy = \int_0^{Y_H} \bar{\theta_M}dy$. therefore
+$$
+Y_H = \left(\frac{5\Delta \theta gH}{3\Omega^2\theta_0}\right),\quad \bar{\theta_M}(0) = \bar{\theta_E}(0)-\frac{5gH(\Delta\theta)^2}{18a^2\Omega^2\theta_0}
+$$
+
+For earth condition, $Y_H \approx 2500 km \approx 20 degrees$.
+
+**Strength of Hadley cells**
+$$
+w \partial_z\theta \approx \frac{\theta_{E0}-\theta}{\tau}, \frac{\partial_z\theta }{\theta_0}\approx \frac{\Delta_V}{H}\\
+w \approx \frac{H}{\theta_0\Delta_V}\frac{\theta_{E0}-\theta}{\tau}, \frac{\theta_{E0}-\theta}{\tau}=\frac{5R\Delta\theta}{18\tau},R = \frac{gH\Delta\theta}{\theta_0\Omega^2a^2} = \frac{gH\Delta_H}{\Omega^2a^2}\\
+w\approx \frac{5R\Delta\theta H}{18\tau\Delta_V \theta_0} = \frac{5R\Delta_HH}{18\tau\Delta_V }
+$$
+
+
+
+## 9.3 Instability of the ideal Hadley circulation
+
+
+# 10. Midlatitudes and Stratosphere
+
+## 10.1 Jet formation
+
+## 10.2 The Ferrel Cell and Surface Winds
+
+## 10.3 The residual circulation
+
+
+
+
+
