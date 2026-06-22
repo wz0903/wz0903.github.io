@@ -1,3 +1,14 @@
+---
+title: "Review of Atmospheric Remote Sensing"
+date: 2026-06-12
+permalink: /posts/2026/06/atmospheric-sensing/
+tags:
+  - Radiation
+  - Remote sensing
+---
+
+This is a review of atmospheric Remote Sensing
+<!-- more -->
 
 
 
