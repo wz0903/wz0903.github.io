@@ -1,3 +1,16 @@
+---
+title: "Review of Statistics"
+date: 2026-06-12
+permalink: /posts/2026/06/atmospheric-statistics/
+tags:
+  - Regression
+  - Statistics
+---
+
+This is a review of atmospheric statistics
+<!-- more -->
+
+
 # 重点回顾
 ## 1. 距离相关系数 Distance Correlation Coefficient
 
