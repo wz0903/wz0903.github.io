@@ -1,6 +1,6 @@
 ---
 title: "Review of Atmospheric Remote Sensing"
-date: 2026-06-12
+date: 2026-06-22
 permalink: /posts/2026/06/atmospheric-sensing/
 tags:
   - Radiation
