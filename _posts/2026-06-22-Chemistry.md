@@ -1,6 +1,6 @@
 ---
 title: "Review of Atmospheric Chemistry"
-date: 2026-06-12
+date: 2026-06-22
 permalink: /posts/2026/06/atmospheric-chemistry/
 tags:
   - Chemistry
