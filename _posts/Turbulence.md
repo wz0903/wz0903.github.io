@@ -1,3 +1,15 @@
+---
+title: "Review of Atmospheric Turbulence"
+date: 2026-06-22
+permalink: /posts/2026/06/atmospheric-turbulenca/
+tags:
+  - Turbulence
+  - CloudPhysics
+---
+
+This is a review of atmospheric turbulence
+<!-- more -->
+
 # 大气湍流针对性复习
 
 
